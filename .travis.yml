@@ -1,0 +1,10 @@
+language: python
+
+script:
+  - tox
+
+cache:
+  - pip
+
+notifications:
+  email: false
