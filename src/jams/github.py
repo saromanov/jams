@@ -17,3 +17,10 @@ class GithubProvider(Provider):
         '''
         repo = self.client.get_repo(name)
         return repo.get_issues(state='open')
+    
+    def get_content_file(self, repo, name):
+        '''
+            returns specific content file
+        '''
+        r = self.get_repository(repo)
+        return r.get_contents(name)
