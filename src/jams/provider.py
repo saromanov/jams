@@ -5,3 +5,6 @@ class Provider:
     
     def token(self):
         return self._token
+    
+    def get_repository(self, name):
+        pass
