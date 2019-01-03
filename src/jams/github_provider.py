@@ -1,3 +1,4 @@
+import base64
 from github import Github
 from provider import Provider
 
@@ -20,6 +21,7 @@ class GithubProvider(Provider):
     
     def get_content_file(self, repo, name):
         '''returns specific content file
+           before return, file will be decoded via base64
         '''
         r = self.get_repository(repo)
-        return r.get_contents(name)
+        return base64.b64decode(r.get_contents(name).content)

@@ -13,10 +13,9 @@ class Jams:
     
     def get_readme(self):
         ''' return content of the README.md file
-            This file will be decoded via base64
         '''
         content_file = self._provider.get_content_file(self._url, 'README.md')
         if content_file is None:
             return ''
-        return base64.b64decode(content_file.content)
+        return content_file
         
