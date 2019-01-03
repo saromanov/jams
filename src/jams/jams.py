@@ -14,8 +14,22 @@ class Jams:
     def get_readme(self):
         ''' return content of the README.md file
         '''
-        content_file = self._provider.get_content_file(self._url, 'README.md')
+        content_file = self._get_readme()
+        print(content_file)
         if content_file is None:
             return ''
         return content_file
+    
+    def _get_readme(self):
+        '''trying on several ways for getting README file
+        with .md, .rst extensions
+        '''
+        try:
+            for path in ['.md', 'rst']:
+                content_file = self._provider.get_content_file(self._url, 'README{0}'.format(path))
+                if content_file is None:
+                    continue
+                return content_file
+        except:
+            return None
         
