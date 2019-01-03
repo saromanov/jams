@@ -16,7 +16,7 @@ class App(object):
         '''
         url = self._parse_url(url)
         provider = self._make_provider(url.hostname.split('.')[0])
-        path = url.path
+        path = url.path[1:]
         self.jams = Jams(path, provider)
     
     def start(self):
