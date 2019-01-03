@@ -8,3 +8,6 @@ class Provider:
     
     def get_repository(self, name):
         pass
+    
+    def get_open_issues(self):
+        pass
