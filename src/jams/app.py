@@ -4,20 +4,24 @@ class App(object):
     def __init__(self, description, version, command_manager):
         self.command_manager = command_manager
         self._provider = None
-        self._providers_inn = dict(github=GithubProvider)
+        self._providers_inn = dict(github=GithubProvider, gitlab=GitlabProvider)
     
     def build(self, url):
-        pass
+        self._provider = _make_provider(self._parse_url(url))
     
     def _parse_url(self, url):
+        ''' parsing of the input url
+        if url not contains github and gitlab
+        then raise exception thats provider is not defined
+        '''
         if not url: raise Exception("url is not defined")
         if url.find('github.com') != -1:
-            self._provider = GithubProvider()
+            return 'github'
         if url.find('gitlab.com'):
-            self._provider = GitlabProvider()
+            return 'gitlab'
+        raise Exception("unable to find provider")
 
-    def make_provider(self, provider_name):
+    def _make_provider(self, provider_name):
+        '''initialization of provider
         '''
-            initialization of provider
-        '''
-        self._provider = self._providers_inn[provider_name]()
+        return self._providers_inn[provider_name]()
