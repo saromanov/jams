@@ -2,6 +2,7 @@ import argparse
 import os
 from gitlab_provider import GitlabProvider
 from github_provider import GithubProvider
+from jams import Jams
 
 class App(object):
     def __init__(self, description, version, command_manager=None):
@@ -10,7 +11,15 @@ class App(object):
         self._providers_inn = dict(github=GithubProvider, gitlab=GitlabProvider)
     
     def build(self, url):
-        self._provider = self._make_provider(self._parse_url(url))
+        ''' build creates a new object
+        '''
+        self.jams = Jams(self._make_provider(self._parse_url(url)))\
+    
+    def start(self):
+        ''' starting of execution of app
+        '''
+        if self.jams is None:
+            raise Exception("App is not initialized")
     
     def _parse_url(self, url):
         ''' parsing of the input url
@@ -32,3 +41,4 @@ class App(object):
         if not token:
             token = os.environ['GITLAB_TOKEN']
         return self._providers_inn[provider_name](token)
+
