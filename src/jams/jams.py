@@ -1,3 +1,4 @@
+import base64
 
 class Jams:
     ''' Jams class provides implementation of the user logic
@@ -12,11 +13,10 @@ class Jams:
     
     def get_readme(self):
         ''' return content of the README.md file
-            after this, this file will be analyzed
-            if README file is not found, then its return 
-            error and downgrade score
+            This file will be decoded via base64
         '''
         content_file = self._provider.get_content_file(self._url, 'README.md')
         if content_file is None:
-            return 
+            return ''
+        return base64.b64decode(content_file.content)
         

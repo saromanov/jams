@@ -10,7 +10,6 @@ class GithubProvider(Provider):
         '''
             return repository by the name
         '''
-        print(self.client.get_repo(name))
         return self.client.get_repo(name)
     
     def get_open_issues(self, name):
