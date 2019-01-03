@@ -13,13 +13,14 @@ class App(object):
     def build(self, url):
         ''' build creates a new object
         '''
-        self.jams = Jams(self._make_provider(self._parse_url(url)))\
+        self.jams = Jams(url, self._make_provider(self._parse_url(url)))
     
     def start(self):
         ''' starting of execution of app
         '''
         if self.jams is None:
             raise Exception("App is not initialized")
+        self.jams.start()
     
     def _parse_url(self, url):
         ''' parsing of the input url
@@ -41,4 +42,3 @@ class App(object):
         if not token:
             token = os.environ['GITLAB_TOKEN']
         return self._providers_inn[provider_name](token)
-
