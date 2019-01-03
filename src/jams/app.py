@@ -14,7 +14,10 @@ class App(object):
     def build(self, url):
         ''' build creates a new object
         '''
-        self.jams = Jams(url, self._make_provider(self._parse_url(url)))
+        url = self._parse_url(url)
+        provider = self._make_provider(url.hostname.split('.')[0])
+        path = url.path
+        self.jams = Jams(path, provider)
     
     def start(self):
         ''' starting of execution of app
