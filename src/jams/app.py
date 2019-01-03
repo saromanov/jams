@@ -1,4 +1,5 @@
 import argparse
+import os
 from gitlab_provider import GitlabProvider
 from github_provider import GithubProvider
 
@@ -25,5 +26,9 @@ class App(object):
 
     def _make_provider(self, provider_name):
         '''initialization of provider
+        reading of access token from environment variable
         '''
-        return self._providers_inn[provider_name]('')
+        token = os.environ['GITHUB_TOKEN']
+        if not token:
+            token = os.environ['GITLAB_TOKEN']
+        return self._providers_inn[provider_name](token)
