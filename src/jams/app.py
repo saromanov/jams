@@ -1,13 +1,15 @@
 import argparse
+from gitlab_provider import GitlabProvider
+from github_provider import GithubProvider
 
 class App(object):
-    def __init__(self, description, version, command_manager):
+    def __init__(self, description, version, command_manager=None):
         self.command_manager = command_manager
         self._provider = None
         self._providers_inn = dict(github=GithubProvider, gitlab=GitlabProvider)
     
     def build(self, url):
-        self._provider = _make_provider(self._parse_url(url))
+        self._provider = self._make_provider(self._parse_url(url))
     
     def _parse_url(self, url):
         ''' parsing of the input url
@@ -24,4 +26,4 @@ class App(object):
     def _make_provider(self, provider_name):
         '''initialization of provider
         '''
-        return self._providers_inn[provider_name]()
+        return self._providers_inn[provider_name]('')

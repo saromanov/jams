@@ -1,4 +1,5 @@
 from github import Github
+from provider import Provider
 
 class GithubProvider(Provider):
     def __init__(self, token):
