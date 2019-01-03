@@ -17,7 +17,6 @@ class Jams:
             error and downgrade score
         '''
         content_file = self._provider.get_content_file(self._url, 'README.md')
-        print(content_file)
         if content_file is None:
             return 
         

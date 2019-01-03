@@ -3,6 +3,7 @@ import os
 from gitlab_provider import GitlabProvider
 from github_provider import GithubProvider
 from jams import Jams
+import urllib.parse as urllib
 
 class App(object):
     def __init__(self, description, version, command_manager=None):
@@ -28,11 +29,7 @@ class App(object):
         then raise exception thats provider is not defined
         '''
         if not url: raise Exception("url is not defined")
-        if url.find('github.com') != -1:
-            return 'github'
-        if url.find('gitlab.com'):
-            return 'gitlab'
-        raise Exception("unable to find provider")
+        return urllib.urlparse(url)
 
     def _make_provider(self, provider_name):
         '''initialization of provider

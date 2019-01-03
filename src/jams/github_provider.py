@@ -10,18 +10,17 @@ class GithubProvider(Provider):
         '''
             return repository by the name
         '''
+        print(self.client.get_repo(name))
         return self.client.get_repo(name)
     
     def get_open_issues(self, name):
-        '''
-            returns list of open issues
+        '''returns list of open issues
         '''
         repo = self.client.get_repo(name)
         return repo.get_issues(state='open')
     
     def get_content_file(self, repo, name):
-        '''
-            returns specific content file
+        '''returns specific content file
         '''
         r = self.get_repository(repo)
         return r.get_contents(name)
