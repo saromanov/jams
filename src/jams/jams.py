@@ -1,4 +1,5 @@
 import base64
+from analyze_readme import AnalyzeReadme
 
 class Jams:
     ''' Jams class provides implementation of the user logic
@@ -18,6 +19,8 @@ class Jams:
         print(content_file)
         if content_file is None:
             return ''
+        r = AnalyzeReadme(content_file)
+        r.check_ci(b'saromanov/godownload')
         return content_file
     
     def _get_readme(self):
