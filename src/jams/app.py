@@ -42,3 +42,7 @@ class App(object):
         if not token:
             token = os.environ['GITLAB_TOKEN']
         return self._providers_inn[provider_name](token)
+
+a = App('sss', '0.1')
+a.build('https://github.com/saromanov/godownload')
+a.start()
