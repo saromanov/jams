@@ -16,11 +16,11 @@ class Jams:
         ''' return content of the README.md file
         '''
         content_file = self._get_readme()
-        print(content_file)
         if content_file is None:
             return ''
+        print(self._url)
         r = AnalyzeReadme(content_file)
-        r.check_ci(b'saromanov/godownload')
+        r.check_ci(self._url)
         return content_file
     
     def _get_readme(self):
