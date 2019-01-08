@@ -1,11 +1,13 @@
+from analyze import Analyze
 
-class AnalyzeReadme:
+class AnalyzeReadme(Analyze):
     def __init__(self, content):
         self._content = str(content)
         self.score = 1
         self._ci = ['https://travis-ci.org', 'https://drone.io/']
+        super().__init__(str(content))
     
-    def check_ci(self, repo):
+    def check(self, repo):
         '''
         check_ci provides checking of README.md
         containce badge with ci provider

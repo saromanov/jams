@@ -18,9 +18,8 @@ class Jams:
         content_file = self._get_readme()
         if content_file is None:
             return ''
-        print(self._url)
         r = AnalyzeReadme(content_file)
-        r.check_ci(self._url)
+        print(r.check(self._url))
         return content_file
     
     def _get_readme(self):
