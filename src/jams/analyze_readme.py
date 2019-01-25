@@ -22,3 +22,10 @@ class AnalyzeReadme(Analyze):
         if len(list(filter(lambda x: self._content.find('{0}/{1}'.format(x, repo)) != -1, self._ci))) > 0:
             return 0
         return 1
+    
+    def _check_quality_report(self, repo):
+        '''
+        this method returns 1 if README not contains quality checker
+        at this moment, its checking for Go
+        '''
+        return 1 if self._content.find('goreportcard.com') == -1 else 0
