@@ -12,8 +12,9 @@ class AnalyzeReadme(Analyze):
         check_ci provides checking of README.md
         containce badge with ci provider
         '''
-        result = self._check_ci(repo) + self._check_quality_report(repo)
-        return result
+        result = 0
+        checkers = [self._check_ci(repo), self._check_quality_report(repo), self._check_title(repo)]
+        return sum(checkers)
     
     def _check_ci(self, repo):
         '''
@@ -30,3 +31,10 @@ class AnalyzeReadme(Analyze):
         at this moment, its checking for Go
         '''
         return 1 if self._content.find('goreportcard.com') == -1 else 0
+    
+    def _check_title(self, repo):
+        '''
+        this method checks if project contains correct
+        project title
+        '''
+        return 0 if self._content.startswith('# ') else 1
