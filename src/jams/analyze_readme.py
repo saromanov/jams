@@ -14,7 +14,8 @@ class AnalyzeReadme(Analyze):
         containce badge with ci provider
         '''
         result = 0
-        checkers = [self._check_ci(repo), self._check_quality_report(), self._check_title()]
+        checkers = [self._check_ci(repo), self._check_quality_report(), self._check_title(),\
+        self._check_overview()]
         return sum(checkers)
     
     def _check_ci(self, repo):
@@ -40,6 +41,11 @@ class AnalyzeReadme(Analyze):
         this method checks if project contains correct
         project title
         '''
-        result = self._content.startswith('# ')
+        result = self._content.startswith('# ') 
         output('Checking correct title', result)
+        return 0 if result else 1
+    
+    def _check_overview(self):
+        result = self._content.find('## Getting Started') > 0 or self._content.find('## Overview') > 0
+        output('Not contains Getting Started or Overflow parts', result)
         return 0 if result else 1
