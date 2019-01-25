@@ -44,6 +44,14 @@ class App(object):
             token = os.environ['GITLAB_TOKEN']
         return self._providers_inn[provider_name](token)
 
+def output(message, passed):
+    '''
+    output provides response for checker
+    '''
+    line = '[+]'
+    if not passed: line = '[x]'
+    print('{0}:{1}'.format(line, message))
+
 a = App('sss', '0.1')
 a.build('https://github.com/saromanov/godownload')
 a.start()
