@@ -31,7 +31,7 @@ class AnalyzeReadme(Analyze):
         this method returns 1 if README not contains quality checker
         at this moment, its checking for Go
         '''
-        result = self._content.find('goreportcard.com') == -1 
+        result = self._content.find('goreportcard.com') > 0
         output('Checking Badge for code quality', result)
         return 1 if result else 0
     
