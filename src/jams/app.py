@@ -9,6 +9,7 @@ class App(object):
     def __init__(self, description, version, command_manager=None):
         self.command_manager = command_manager
         self._provider = None
+        self._description = description
         self._providers_inn = dict(github=GithubProvider, gitlab=GitlabProvider)
     
     def build(self, url):
