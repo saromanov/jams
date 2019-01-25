@@ -12,7 +12,8 @@ class AnalyzeReadme(Analyze):
         check_ci provides checking of README.md
         containce badge with ci provider
         '''
-        return self._check_ci(repo)
+        result = self._check_ci(repo) + self._check_quality_report(repo)
+        return result
     
     def _check_ci(self, repo):
         '''
