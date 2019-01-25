@@ -32,6 +32,6 @@ class Jams:
                 if content_file is None:
                     continue
                 return content_file
-        except:
+        except Exception:
             return None
         
