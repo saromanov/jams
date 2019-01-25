@@ -1,4 +1,5 @@
 from analyze import Analyze
+from output import output
 
 class AnalyzeReadme(Analyze):
     def __init__(self, content):
@@ -20,21 +21,25 @@ class AnalyzeReadme(Analyze):
         '''
         this method trying to parse README.md and find
         badge which is point to CI provider
-        ''' 
-        if len(list(filter(lambda x: self._content.find('{0}/{1}'.format(x, repo)) != -1, self._ci))) > 0:
-            return 0
-        return 1
+        '''
+        result = len(list(filter(lambda x: self._content.find('{0}/{1}'.format(x, repo)) != -1, self._ci))) > 0
+        output('Checking Badge for CI', result)
+        return 0 if result else 1
     
     def _check_quality_report(self):
         '''
         this method returns 1 if README not contains quality checker
         at this moment, its checking for Go
         '''
-        return 1 if self._content.find('goreportcard.com') == -1 else 0
+        result = self._content.find('goreportcard.com') == -1 
+        output('Checking Badge for code quality', result)
+        return 1 if result else 0
     
     def _check_title(self):
         '''
         this method checks if project contains correct
         project title
         '''
-        return 0 if self._content.startswith('# ') else 1
+        result = self._content.startswith('# ')
+        output('Checking correct title', result)
+        return 0 if result else 1
