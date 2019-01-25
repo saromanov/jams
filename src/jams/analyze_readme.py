@@ -13,7 +13,7 @@ class AnalyzeReadme(Analyze):
         containce badge with ci provider
         '''
         result = 0
-        checkers = [self._check_ci(repo), self._check_quality_report(repo), self._check_title(repo)]
+        checkers = [self._check_ci(repo), self._check_quality_report(), self._check_title()]
         return sum(checkers)
     
     def _check_ci(self, repo):
@@ -25,14 +25,14 @@ class AnalyzeReadme(Analyze):
             return 0
         return 1
     
-    def _check_quality_report(self, repo):
+    def _check_quality_report(self):
         '''
         this method returns 1 if README not contains quality checker
         at this moment, its checking for Go
         '''
         return 1 if self._content.find('goreportcard.com') == -1 else 0
     
-    def _check_title(self, repo):
+    def _check_title(self):
         '''
         this method checks if project contains correct
         project title
