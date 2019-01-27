@@ -8,7 +8,7 @@ class Jams:
     def __init__(self, url, provider):
         self._provider = provider
         self._url = url
-        self._checkers=[]
+        self._checkers=[AnalyzeReadme]
     
     def start(self):
         self.check_readme()
@@ -24,8 +24,10 @@ class Jams:
         content_file = self._get_readme()
         if content_file is None:
             return ''
-        r = AnalyzeReadme(content_file).check(self._url)
-        print(r)
+
+        for checker in self._checkers:
+            r = checker(content_file).check(self._url)
+            print(r)
         return content_file
     
     def _get_readme(self):
