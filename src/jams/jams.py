@@ -8,9 +8,15 @@ class Jams:
     def __init__(self, url, provider):
         self._provider = provider
         self._url = url
+        self._checkers=[]
     
     def start(self):
         self.check_readme()
+    
+    def register_checker(self, name):
+        '''register checker provides registration of checker
+        '''
+        pass
     
     def check_readme(self):
         ''' return content of the README.md file
