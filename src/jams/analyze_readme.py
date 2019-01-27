@@ -1,8 +1,8 @@
-from analyze import Analyze
+from checker import Checker
 from output import output
 
 
-class AnalyzeReadme(Analyze):
+class AnalyzeReadme(Checker):
     def __init__(self, content):
         self._content = str(content)
         self.score = 1

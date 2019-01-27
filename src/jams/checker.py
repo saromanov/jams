@@ -1,5 +1,5 @@
 
-class Analyze:
+class Checker:
     """
     This class defines base class for analyze content
     """
