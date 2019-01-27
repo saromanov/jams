@@ -10,9 +10,9 @@ class Jams:
         self._url = url
     
     def start(self):
-        self.get_readme()
+        self.check_readme()
     
-    def get_readme(self):
+    def check_readme(self):
         ''' return content of the README.md file
         '''
         content_file = self._get_readme()
