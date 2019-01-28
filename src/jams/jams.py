@@ -1,6 +1,9 @@
 from analyze_readme import AnalyzeReadme
 
 
+class DetectLanguageException(Exception):
+    pass
+
 class Jams:
     ''' Jams class provides implementation of the user logic
         all handling insede the app. Getting files, analyzing, etc
@@ -13,6 +16,15 @@ class Jams:
 
     def start(self):
         self.check_readme()
+    
+    def detect_language(self):
+        '''provides detecting of the language by request to the
+        repo and getting language from this
+        '''
+        language = self._provider.get_repo(self._url).language
+        if not language:
+            raise DetectLanguageException('unable to detect language')
+        return language
 
     def register_checker(self, name):
         '''register checker provides registration of checker
@@ -21,6 +33,7 @@ class Jams:
     def check_readme(self):
         ''' return content of the README.md file
         '''
+        print(self._provider.get_repo(self._url).language)
         content_file = self._get_readme()
         if content_file is None:
             return ''
