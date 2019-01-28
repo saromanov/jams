@@ -12,7 +12,7 @@ class AnalyzeReadme(Checker):
     def start_message(self):
         """return message before start of readme checks
         """
-        return 'Checking of the README file'
+        print('Checking of the README file\n')
 
     def check(self, repo):
         '''

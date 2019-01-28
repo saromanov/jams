@@ -52,7 +52,9 @@ class Jams:
             return ''
 
         for checker in self._checkers:
-            r = checker(content_file).check(self._url)
+            r = checker(content_file)
+            r.start_message()
+            r.check(self._url)
             print(r)
         return content_file
 
