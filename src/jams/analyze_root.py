@@ -7,3 +7,8 @@ class AnalyzeRoot(Checker):
     """
     def __init__(self):
         super().__init__()
+    
+    def start_message(self):
+        """return message before start of checkers
+        """
+        return 'Checking of the root structure'

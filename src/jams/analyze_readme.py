@@ -8,6 +8,11 @@ class AnalyzeReadme(Checker):
         self.score = 1
         self._ci = ['https://travis-ci.org', 'https://drone.io/']
         super().__init__(str(content))
+    
+    def start_message(self):
+        """return message before start of readme checks
+        """
+        return 'Checking of the README file'
 
     def check(self, repo):
         '''
