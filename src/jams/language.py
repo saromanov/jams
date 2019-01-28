@@ -18,4 +18,10 @@ class GoLang(Language):
     """
     def __init__(self, provider):
         Language.__init__(self, provider)
+
+class PythonLang(Language):
+    """Provide checking specific for python
+    """
+    def __init__(self, provider):
+        Language.__init__(self, provider)
     

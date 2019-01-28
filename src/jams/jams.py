@@ -1,5 +1,5 @@
 from analyze_readme import AnalyzeReadme
-
+from language import GoLang, PythonLang
 
 class DetectLanguageException(Exception):
     pass
