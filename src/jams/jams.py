@@ -41,6 +41,7 @@ class Jams:
     def register_checker(self, name):
         '''register checker provides registration of checker
         '''
+        pass
 
     def check_readme(self):
         ''' return content of the README.md file
