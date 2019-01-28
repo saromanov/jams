@@ -4,6 +4,9 @@ from analyze_readme import AnalyzeReadme
 class DetectLanguageException(Exception):
     pass
 
+class NotSupportedLanguageException(Exception):
+    pass
+
 class Jams:
     ''' Jams class provides implementation of the user logic
         all handling insede the app. Getting files, analyzing, etc
@@ -13,9 +16,18 @@ class Jams:
         self._provider = provider
         self._url = url
         self._checkers = [AnalyzeReadme]
+        self._lang = self._select_language(self.detect_language())
 
     def start(self):
         self.check_readme()
+    
+    def _select_language(self, lang):
+        if lang == 'Go':
+            return GoLang(self._provider)
+        elif lang == 'Python':
+            return PythonLang(self._provider)
+        else:
+            raise NotSupportedLanguageException('language not supported')
     
     def detect_language(self):
         '''provides detecting of the language by request to the
