@@ -22,3 +22,12 @@ class AnalyzeRoot(Checker):
                     self._url, 'LICENCE')
         except Exception:
             return None
+    
+    def _get_dockerfile(self):
+        '''trying to get Dockerfile
+        '''
+        try:
+            return self._provider.get_content_file(
+                    self._url, 'LICENCE')
+        except Exception:
+            return None
