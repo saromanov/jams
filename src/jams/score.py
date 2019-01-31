@@ -19,3 +19,9 @@ class Score:
         ''' setting check to the known checks
         '''
         self._checks[name] = score
+    
+    def result(self):
+        '''retruns result from all checks
+        '''
+        for k, v in self._checks.items():
+            print(k, v) 

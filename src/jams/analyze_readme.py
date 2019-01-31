@@ -25,6 +25,7 @@ class AnalyzeReadme(Checker):
             self._check_title(),\
             self._check_overview()]
         self.score.add_total_checks(len(checkers))
+        self.score.result()
         return sum(checkers)
 
     def _check_ci(self, repo):
