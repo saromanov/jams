@@ -9,6 +9,11 @@ class AnalyzeRoot(Checker):
         super().__init__()
         self._provider = provider
     
+    def check(self, repo):
+        docker_file = self._get_dockerfile(repo)
+        if not docker_file:
+            return 
+    
     def start_message(self):
         """return message before start of checkers
         """
@@ -22,6 +27,15 @@ class AnalyzeRoot(Checker):
                     self._url, 'LICENCE')
         except Exception:
             return None
+    
+    def _check_dockerfile(self):
+        '''https://gist.github.com/Faheetah/a2a401a01d2d56fa7d1a9d7ab0d2831b
+        '''
+        docker_file = self._get_dockerfile()
+        if not docker_file:
+            return 1
+        if len(docker_file.find(':latest')) > 0:
+            return 0
     
     def _get_dockerfile(self):
         '''trying to get Dockerfile
