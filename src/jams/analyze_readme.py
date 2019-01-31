@@ -1,11 +1,12 @@
 from checker import Checker
 from output import output
+from score import Score
 
 
 class AnalyzeReadme(Checker):
     def __init__(self, content):
         self._content = str(content)
-        self.score = 1
+        self.score = Score()
         self._ci = ['https://travis-ci.org', 'https://drone.io/']
         super().__init__(str(content))
     
@@ -23,6 +24,7 @@ class AnalyzeReadme(Checker):
             self._check_quality_report(), \
             self._check_title(),\
             self._check_overview()]
+        self.score.add_total_checks(len(checkers))
         return sum(checkers)
 
     def _check_ci(self, repo):
