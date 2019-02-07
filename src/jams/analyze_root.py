@@ -36,7 +36,7 @@ class AnalyzeRoot(Checker):
         docker_file = self._get_dockerfile()
         if not docker_file:
             return 1
-        if len(docker_file.find(':latest')) > 0:
+        if docker_file.find(':latest')):
             return 0
 
     def _get_dockerfile(self):
