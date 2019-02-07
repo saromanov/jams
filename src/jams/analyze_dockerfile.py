@@ -20,3 +20,7 @@ class AnalyzeDockerfile(Checker):
         if len(docker_file.find(':latest')) > 0:
             return 0
         output('Checking of the :latest tag', result)
+    
+    def _check_run_command(self):
+        if self._content.find('RUN wget'):
+            return 0
