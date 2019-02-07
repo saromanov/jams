@@ -1,11 +1,14 @@
 from analyze_readme import AnalyzeReadme
 from language import GoLang, PythonLang
 
+
 class DetectLanguageException(Exception):
     pass
 
+
 class NotSupportedLanguageException(Exception):
     pass
+
 
 class Jams:
     ''' Jams class provides implementation of the user logic
@@ -20,7 +23,7 @@ class Jams:
 
     def start(self):
         self.check_readme()
-    
+
     def _select_language(self, lang):
         if lang == 'Go':
             return GoLang(self._provider)
@@ -28,7 +31,7 @@ class Jams:
             return PythonLang(self._provider)
         else:
             raise NotSupportedLanguageException('language not supported')
-    
+
     def detect_language(self):
         '''provides detecting of the language by request to the
         repo and getting language from this

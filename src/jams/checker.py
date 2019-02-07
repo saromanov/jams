@@ -16,7 +16,7 @@ class Checker:
         of content
         '''
         raise NotImplementedError
-    
+
     def start_message(self):
         ''' return message which be shown
         before start of checkers

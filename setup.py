@@ -7,9 +7,11 @@ from pip.req import parse_requirements
 
 version = "1.0"
 
+
 def get_requirements():
     install_reqs = parse_requirements('requirements.txt', session='jams')
     return [str(ir.req) for ir in install_reqs]
+
 
 if __name__ == "__main__":
     setuptools.setup(

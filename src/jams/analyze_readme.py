@@ -9,7 +9,7 @@ class AnalyzeReadme(Checker):
         self.score = Score()
         self._ci = ['https://travis-ci.org', 'https://drone.io/']
         super().__init__(str(content))
-    
+
     def start_message(self):
         """return message before start of readme checks
         """
@@ -20,10 +20,10 @@ class AnalyzeReadme(Checker):
         check_ci provides checking of README.md
         containce badge with ci provider
         '''
-        checkers = [self._check_ci(repo), \
-            self._check_quality_report(), \
-            self._check_title(),\
-            self._check_overview()]
+        checkers = [self._check_ci(repo),
+                    self._check_quality_report(),
+                    self._check_title(),
+                    self._check_overview()]
         self.score.add_total_checks(len(checkers))
         self.score.result()
         return sum(checkers)
@@ -63,5 +63,6 @@ class AnalyzeReadme(Checker):
         result = self._content.find(
             '## Getting Started') > 0 or self._content.find('## Overview') > 0
         output('Not contains Getting Started or Overflow parts', result)
-        self.score.add_check('Not contains Getting Started or Overflow parts', result)
+        self.score.add_check(
+            'Not contains Getting Started or Overflow parts', result)
         return 0 if result else 1
