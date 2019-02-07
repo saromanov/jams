@@ -44,6 +44,6 @@ class AnalyzeRoot(Checker):
         '''
         try:
             return self._provider.get_content_file(
-                self._url, 'LICENCE')
+                self._url, '.Dockerfile')
         except Exception:
             return None
