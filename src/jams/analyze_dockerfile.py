@@ -11,6 +11,14 @@ class AnalyzeDockerfile(Checker):
         self.score = Score()
         super().__init__(str(content))
     
+    def start_message(self):
+        """return message before start of docker checks
+        """
+        print('Checking of the Dockerfile file\n')
+    
+    def check(self):
+        raise NotImplementedError
+    
     def _check_latest(self):
         '''check if Docker file contains pulling from :latest tag
         '''
