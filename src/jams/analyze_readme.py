@@ -1,6 +1,7 @@
 from checker import Checker
 from output import output
 from score import Score
+from task import Task
 
 
 class AnalyzeReadme(Checker):
@@ -16,10 +17,10 @@ class AnalyzeReadme(Checker):
         print('Checking of the README file\n')
 
     def check(self, repo):
-        '''
-        check_ci provides checking of README.md
+        """check_ci provides checking of README.md
         containce badge with ci provider
-        '''
+        """
+        t := Task('check_ci', action=action)
         checkers = [self._check_ci(repo),
                     self._check_quality_report(),
                     self._check_title(),
