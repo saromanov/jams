@@ -12,6 +12,12 @@ class TaskBase:
     
     def __str__(self):
         return self._name
+    
+    def weight(self):
+        """return weight of the task in the case
+        if task was completed
+        """
+        return 0
 
 class Task(TaskBase):
     def __init__(self, name):
