@@ -16,7 +16,7 @@ class AnalyzeDockerfile(Checker):
         """
         print('Checking of the Dockerfile file\n')
     
-    def check(self):
+    def check(self, url):
         """ checks provides running of all sub-checks
         """
         checks = [self._check_latest, self._check_run_command]
@@ -34,3 +34,4 @@ class AnalyzeDockerfile(Checker):
     def _check_run_command(self):
         if self._content.find('RUN wget'):
             return 0
+        return 1
