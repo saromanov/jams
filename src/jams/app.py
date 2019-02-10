@@ -21,7 +21,7 @@ class App(object):
         path = url.path[1:]
         self.jams = Jams(path, provider)
 
-    def start(self):
+    def report(self):
         ''' starting of execution of app
         '''
         if self.jams is None:
@@ -49,4 +49,4 @@ class App(object):
 
 a = App('sss', '0.1')
 a.build('https://github.com/saromanov/godownload')
-a.start()
+a.report()
