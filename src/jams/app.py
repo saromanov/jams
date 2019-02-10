@@ -38,9 +38,9 @@ class App(object):
         return urllib.urlparse(url)
 
     def _make_provider(self, provider_name):
-        '''initialization of provider
+        """initialization of provider
         reading of access token from environment variable
-        '''
+        """
         token = os.environ['GITHUB_TOKEN']
         if not token:
             token = os.environ['GITLAB_TOKEN']
