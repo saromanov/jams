@@ -22,7 +22,9 @@ class Jams:
         self._checkers = [AnalyzeReadme, AnalyzeDockerfile]
         self._lang = self._select_language(self.detect_language())
 
-    def start(self):
+    def report(self):
+        """ report provides starting of registered checkers
+        """
         self.check_readme()
 
     def _select_language(self, lang):
