@@ -16,6 +16,9 @@ class TaskBase:
     def __getattr__(self, name):
         return '{0} call'.format(name)
     
+    def do(self):
+        raise NotImplementedError
+    
     def weight(self):
         """return weight of the task in the case
         if task was completed
@@ -24,4 +27,6 @@ class TaskBase:
 
 class Task(TaskBase):
     def __init__(self, name, *args,**kwargs):
-        super().__init__(name)
+        self._weight = kwargs.get('weight')
+        self._action = kwargs.get('action')
+        super().__init__(name, *args, **kwargs)
