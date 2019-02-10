@@ -42,10 +42,10 @@ class Jams:
             raise DetectLanguageException('unable to detect language')
         return language
 
-    def register_checker(self, name):
-        '''register checker provides registration of checker
-        '''
-        pass
+    def register_checker(self, check):
+        """register checker provides registration of checker
+        """
+        self._checkers.append(check)
 
     def check_readme(self):
         ''' return content of the README.md file
