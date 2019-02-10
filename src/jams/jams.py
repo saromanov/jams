@@ -1,4 +1,5 @@
 from analyze_readme import AnalyzeReadme
+from analyze_dockerfile import AnalyzeDockerfile
 from language import GoLang, PythonLang
 
 
@@ -18,7 +19,7 @@ class Jams:
     def __init__(self, url, provider):
         self._provider = provider
         self._url = url
-        self._checkers = [AnalyzeReadme]
+        self._checkers = [AnalyzeReadme, AnalyzeDockerfile]
         self._lang = self._select_language(self.detect_language())
 
     def start(self):
