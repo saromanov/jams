@@ -17,7 +17,9 @@ class AnalyzeDockerfile(Checker):
         print('Checking of the Dockerfile file\n')
     
     def check(self):
-        raise NotImplementedError
+        """ checks provides running of all sub-checks
+        """
+        checks = [self._check_latest, self._check_run_command]
     
     def _check_latest(self):
         '''check if Docker file contains pulling from :latest tag
