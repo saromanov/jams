@@ -1,4 +1,5 @@
 from task import Task
+from score import Score
 
 class Checker:
     """
@@ -9,6 +10,7 @@ class Checker:
         self._content = content
         self._task = Task(task_name)
         self._url = url
+        self.score = Score()
 
     def __str__(self):
         return self._content

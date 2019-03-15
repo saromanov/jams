@@ -1,6 +1,5 @@
 from checker import Checker
 from output import output
-from score import Score
 
 
 class AnalyzeRoot(Checker):
@@ -13,7 +12,6 @@ class AnalyzeRoot(Checker):
         self._provider = provider
         self._content = content
         self._provider = provider
-        self.score = Score()
 
     def check(self, repo):
         return sum([self._check_licence(), self._check_dockerfile()])

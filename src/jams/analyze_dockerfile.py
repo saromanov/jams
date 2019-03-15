@@ -1,6 +1,5 @@
 from checker import Checker
 from output import output
-from score import Score
 
 class AnalyzeDockerfile(Checker):
     """ provides analization of the Dockerfile
@@ -8,7 +7,6 @@ class AnalyzeDockerfile(Checker):
     """
     def __init__(self, content, url=None, provider=None):
         self._content = str(content)
-        self.score = Score()
         super().__init__(str(content), url=url)
     
     def start_message(self):

@@ -1,13 +1,11 @@
 from checker import Checker
 from output import output
-from score import Score
 from task import Task
 
 
 class AnalyzeReadme(Checker):
     def __init__(self, content, url=None, provider=None):
         self._content = str(content)
-        self.score = Score()
         self._ci = ['https://travis-ci.org', 'https://drone.io/']
         super().__init__(str(content), url=url)
 
