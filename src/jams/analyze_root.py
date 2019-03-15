@@ -1,5 +1,6 @@
 from checker import Checker
 from output import output
+from score import Score
 
 
 class AnalyzeRoot(Checker):
@@ -10,6 +11,7 @@ class AnalyzeRoot(Checker):
     def __init__(self, provider):
         super().__init__(provider)
         self._provider = provider
+        self.score = Score()
 
     def check(self, repo):
         return sum([self._check_licence(), self._check_dockerfile()])
@@ -17,12 +19,16 @@ class AnalyzeRoot(Checker):
     def start_message(self):
         """return message before start of checkers
         """
-        return 'Checking of the root structure'
+        print('Checking of the root structure\n')
     
     def _check_licence(self):
         """ returns 1 if repo contance licence
         """
-        return 0 if not self._get_licence() else 1
+        msg = 'Checking of the Licence'
+        result = 0 if not self._get_licence() else 1
+        output(msg, result)
+        self.score.add_check(msg, result)
+        return result
 
     def _get_licence(self):
         '''trying to get licence from repo

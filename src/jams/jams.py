@@ -62,7 +62,6 @@ class Jams:
         content_file = self._get_readme()
         if content_file is None:
             return ''
-
         for checker in self._checkers:
             r = checker(content_file)
             r.start_message()
