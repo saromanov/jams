@@ -1,5 +1,6 @@
 from analyze_readme import AnalyzeReadme
 from analyze_dockerfile import AnalyzeDockerfile
+from analyze_root import AnalyzeRoot
 from language import GoLang, PythonLang
 
 
@@ -25,7 +26,7 @@ class Jams:
     def _make_checkers(self):
         """ returns registered checkers
         """
-        return [AnalyzeReadme, AnalyzeDockerfile]
+        return [AnalyzeReadme, AnalyzeDockerfile, AnalyzeRoot]
 
     def report(self):
         """ report provides starting of registered checkers
