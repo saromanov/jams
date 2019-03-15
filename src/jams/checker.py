@@ -1,11 +1,13 @@
+from task import Task
 
 class Checker:
     """
     This class defines base class for analyze content
     """
 
-    def __init__(self, content):
+    def __init__(self, content, task_name='default'):
         self._content = content
+        self._task = Task(task_name)
 
     def __str__(self):
         return self._content

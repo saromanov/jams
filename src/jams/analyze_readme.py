@@ -20,13 +20,11 @@ class AnalyzeReadme(Checker):
         """check_ci provides checking of README.md
         containce badge with ci provider
         """
-        t = Task('check_ci', action=repo)
         checkers = [self._check_ci(repo),
                     self._check_quality_report(),
                     self._check_title(),
                     self._check_overview()]
         self.score.add_total_checks(len(checkers))
-        self.score.result()
         return sum(checkers)
 
     def _check_ci(self, repo):

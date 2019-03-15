@@ -66,7 +66,6 @@ class Jams:
             r = checker(content_file)
             r.start_message()
             r.check(self._url)
-            print(r)
         return content_file
 
     def _get_readme(self):
