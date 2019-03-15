@@ -19,7 +19,8 @@ class App(object):
         url = self._parse_url(url)
         if not url.hostname:
             raise Exception('Hostname is not defined')
-        provider = self._make_provider(url.hostname.split('.')[0])
+        print(url)
+        provider = self._make_provider(url.hostname.split('.')[0], url)
         path = url.path[1:]
         return Jams(path, provider)
 
@@ -32,14 +33,14 @@ class App(object):
             raise Exception("url is not defined")
         return urllib.urlparse(url)
 
-    def _make_provider(self, provider_name):
+    def _make_provider(self, provider_name, url):
         """initialization of provider
         reading of access token from environment variable
         """
         token = os.environ['GITHUB_TOKEN']
         if not token:
             token = os.environ['GITLAB_TOKEN']
-        return self._providers_inn[provider_name](token)
+        return self._providers_inn[provider_name](token, url)
 
 
 a = App('sss', '0.1')

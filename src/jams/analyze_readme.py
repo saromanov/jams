@@ -5,7 +5,7 @@ from task import Task
 
 
 class AnalyzeReadme(Checker):
-    def __init__(self, content, url=None):
+    def __init__(self, content, url=None, provider=None):
         self._content = str(content)
         self.score = Score()
         self._ci = ['https://travis-ci.org', 'https://drone.io/']

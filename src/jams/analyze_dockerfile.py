@@ -6,7 +6,7 @@ class AnalyzeDockerfile(Checker):
     """ provides analization of the Dockerfile
     https://gist.github.com/Faheetah/a2a401a01d2d56fa7d1a9d7ab0d2831b
     """
-    def __init__(self, content, url=None):
+    def __init__(self, content, url=None, provider=None):
         self._content = str(content)
         self.score = Score()
         super().__init__(str(content), url=url)

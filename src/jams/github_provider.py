@@ -4,8 +4,8 @@ from provider import Provider
 
 
 class GithubProvider(Provider):
-    def __init__(self, token):
-        Provider.__init__(self, token)
+    def __init__(self, token, url):
+        Provider.__init__(self, token, url)
         self.client = Github(token)
 
     def get_repo(self, name):

@@ -62,7 +62,7 @@ class Jams:
         if content_file is None:
             return ''
         for checker in self._checkers:
-            r = checker(content_file, url=self._url)
+            r = checker(content_file, provider=self._provider)
             r.start_message()
             r.check(self._url)
         return content_file

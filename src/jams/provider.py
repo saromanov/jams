@@ -1,7 +1,8 @@
 
 class Provider:
-    def __init__(self, token):
+    def __init__(self, token, url):
         self._token = token
+        self._url = url
 
     def token(self):
         return self._token
