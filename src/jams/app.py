@@ -17,6 +17,8 @@ class App(object):
         ''' build creates a new object
         '''
         url = self._parse_url(url)
+        if not url.hostname:
+            raise Exception('Hostname is not defined')
         provider = self._make_provider(url.hostname.split('.')[0])
         path = url.path[1:]
         return Jams(path, provider)

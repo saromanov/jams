@@ -19,8 +19,13 @@ class Jams:
     def __init__(self, url, provider):
         self._provider = provider
         self._url = url
-        self._checkers = [AnalyzeReadme, AnalyzeDockerfile]
+        self._checkers = self._make_checkers()
         self._lang = self._select_language(self.detect_language())
+    
+    def _make_checkers(self):
+        """ returns registered checkers
+        """
+        return [AnalyzeReadme, AnalyzeDockerfile]
 
     def report(self):
         """ report provides starting of registered checkers
