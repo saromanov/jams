@@ -19,8 +19,7 @@ class App(object):
         url = self._parse_url(url)
         if not url.hostname:
             raise Exception('Hostname is not defined')
-        print(url)
-        provider = self._make_provider(url.hostname.split('.')[0], url)
+        provider = self._make_provider(url.hostname.split('.')[0], url.path[1:])
         path = url.path[1:]
         return Jams(path, provider)
 

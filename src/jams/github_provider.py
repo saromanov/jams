@@ -24,5 +24,7 @@ class GithubProvider(Provider):
         '''returns specific content file
            before return, file will be decoded via base64
         '''
+        if repo is None:
+            repo = self._url
         r = self.get_repo(repo)
         return base64.b64decode(r.get_contents(name).content)

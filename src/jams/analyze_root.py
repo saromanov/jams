@@ -35,10 +35,10 @@ class AnalyzeRoot(Checker):
     def _get_licence(self):
         '''trying to get licence from repo
         '''
-        print(self._provider)
+        print()
         try:
             return self._provider.get_content_file(
-                self._url, 'LICENCE')
+                None, 'LICENCE')
         except Exception:
             return None
 
