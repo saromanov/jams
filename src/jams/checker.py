@@ -5,9 +5,10 @@ class Checker:
     This class defines base class for analyze content
     """
 
-    def __init__(self, content, task_name='default'):
+    def __init__(self, content, task_name='default', url=None):
         self._content = content
         self._task = Task(task_name)
+        self._url = url
 
     def __str__(self):
         return self._content

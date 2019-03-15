@@ -58,12 +58,11 @@ class Jams:
     def check_readme(self):
         ''' return content of the README.md file
         '''
-        print(self._provider.get_repo(self._url).language)
         content_file = self._get_readme()
         if content_file is None:
             return ''
         for checker in self._checkers:
-            r = checker(content_file)
+            r = checker(content_file, url=self._url)
             r.start_message()
             r.check(self._url)
         return content_file

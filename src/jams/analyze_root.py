@@ -8,8 +8,8 @@ class AnalyzeRoot(Checker):
     of the project. It can be check licence, contributing, make file, etc
     """
 
-    def __init__(self, provider):
-        super().__init__(provider)
+    def __init__(self, provider, url=None):
+        super().__init__(provider, url=url)
         self._provider = provider
         self.score = Score()
 
@@ -33,6 +33,7 @@ class AnalyzeRoot(Checker):
     def _get_licence(self):
         '''trying to get licence from repo
         '''
+        print(self._url)
         try:
             return self._provider.get_content_file(
                 self._url, 'LICENCE')

@@ -5,11 +5,11 @@ from task import Task
 
 
 class AnalyzeReadme(Checker):
-    def __init__(self, content):
+    def __init__(self, content, url=None):
         self._content = str(content)
         self.score = Score()
         self._ci = ['https://travis-ci.org', 'https://drone.io/']
-        super().__init__(str(content))
+        super().__init__(str(content), url=url)
 
     def start_message(self):
         """return message before start of readme checks
