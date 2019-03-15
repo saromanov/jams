@@ -35,7 +35,6 @@ class AnalyzeRoot(Checker):
     def _get_licence(self):
         '''trying to get licence from repo
         '''
-        print()
         try:
             return self._provider.get_content_file(
                 None, 'LICENCE')
@@ -43,13 +42,13 @@ class AnalyzeRoot(Checker):
             return None
 
     def _check_dockerfile(self):
-        '''https://gist.github.com/Faheetah/a2a401a01d2d56fa7d1a9d7ab0d2831b
+        '''provides checking of teh Dockerfile
         '''
-        docker_file = self._get_dockerfile()
-        if not docker_file:
-            return 1
-        if docker_file.find(':latest'):
-            return 0
+        msg = 'Checking of the Dockerfile at the root'
+        result = 0 if not self._get_dockerfile() else 1
+        output(msg, result)
+        self.score.add_check(msg, result)
+        return result
 
     def _get_dockerfile(self):
         '''trying to get Dockerfile
