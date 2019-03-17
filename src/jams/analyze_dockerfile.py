@@ -24,7 +24,7 @@ class AnalyzeDockerfile(Checker):
     def _check_latest(self):
         '''check if Docker file contains pulling from :latest tag
         '''
-        docker_file = self._get_dockerfile()
+        docker_file = self._get_file('Dockerfile', None)
         if not docker_file:
             return 1
         if len(docker_file.find(':latest')) > 0:
@@ -35,3 +35,12 @@ class AnalyzeDockerfile(Checker):
         if self._content.find('RUN wget'):
             return 0
         return 1
+    
+    def _get_file(self, name, url):
+        """trying to get file
+        """
+        try:
+            return self._provider.get_content_file(
+                url, name)
+        except Exception:
+            return None
