@@ -14,18 +14,18 @@ class AnalyzeRoot(Checker):
         self._provider = provider
 
     def check(self, repo):
-        return sum([self._check_licence(), self._check_dockerfile()])
+        return sum([self._check_license(), self._check_dockerfile(), self._check_gomod()])
 
     def start_message(self):
         """return message before start of checkers
         """
         print('Checking of the root structure\n')
     
-    def _check_licence(self):
-        """ returns 1 if repo contance licence
+    def _check_license(self):
+        """ returns 1 if repo contance license
         """
-        msg = 'Checking of the Licence'
-        result = 0 if not self._get_licence() else 1
+        msg = 'Checking of the license'
+        result = 0 if not self._get_license() else 1
         output(msg, result)
         self.score.add_check(msg, result)
         return result
@@ -35,7 +35,7 @@ class AnalyzeRoot(Checker):
         at the directory
         """
         msg = 'Checking of go.mod'
-        result = 0 if not self._get_licence() else 1
+        result = 0 if not self._get_gomod() else 1
         output(msg, result)
         self.score.add_check(msg, result)
         return result
@@ -48,22 +48,27 @@ class AnalyzeRoot(Checker):
         output(msg, result)
         self.score.add_check(msg, result)
         return result
+    
+    def _get_gomod(self):
+        """trying to get go.mod
+        """
+        return self._get_file('go.mod', None)
 
     def _get_dockerfile(self):
         '''trying to get Dockerfile
         '''
-        return self._get_file('Dockerfile')
+        return self._get_file('Dockerfile', self._url)
     
-    def _get_licence(self):
-        '''trying to get licence from repo
+    def _get_license(self):
+        '''trying to get license from repo
         '''
-        return self._get_file('LICENSE')
+        return self._get_file('LICENSE', None)
     
-    def _get_file(self, name):
+    def _get_file(self, name, url):
         """trying to get file
         """
         try:
             return self._provider.get_content_file(
-                self._url, name)
+                url, name)
         except Exception:
             return None
