@@ -17,7 +17,9 @@ class AnalyzeDockerfile(Checker):
     def check(self, url):
         """ checks provides running of all sub-checks
         """
-        checks = [self._check_latest, self._check_run_command]
+        checks = [self._check_latest(), self._check_run_command()]
+        self.score.add_total_checks(len(checks))
+        return sum(checks)
     
     def _check_latest(self):
         '''check if Docker file contains pulling from :latest tag
