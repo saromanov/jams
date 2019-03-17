@@ -29,6 +29,16 @@ class AnalyzeRoot(Checker):
         output(msg, result)
         self.score.add_check(msg, result)
         return result
+    
+    def _check_gomod(self):
+        """ provides checking if go.mod is exist
+        at the directory
+        """
+        msg = 'Checking of go.mod'
+        result = 0 if not self._get_licence() else 1
+        output(msg, result)
+        self.score.add_check(msg, result)
+        return result
 
     def _get_licence(self):
         '''trying to get licence from repo
