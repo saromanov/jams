@@ -40,17 +40,8 @@ class AnalyzeRoot(Checker):
         self.score.add_check(msg, result)
         return result
 
-    def _get_licence(self):
-        '''trying to get licence from repo
-        '''
-        try:
-            return self._provider.get_content_file(
-                None, 'LICENCE')
-        except Exception:
-            return None
-
     def _check_dockerfile(self):
-        '''provides checking of teh Dockerfile
+        '''provides checking of the Dockerfile
         '''
         msg = 'Checking of the Dockerfile at the root'
         result = 0 if not self._get_dockerfile() else 1
@@ -61,8 +52,18 @@ class AnalyzeRoot(Checker):
     def _get_dockerfile(self):
         '''trying to get Dockerfile
         '''
+        return self._get_file('Dockerfile')
+    
+    def _get_licence(self):
+        '''trying to get licence from repo
+        '''
+        return self._get_file('LICENSE')
+    
+    def _get_file(self, name):
+        """trying to get file
+        """
         try:
             return self._provider.get_content_file(
-                self._url, '.Dockerfile')
+                self._url, name)
         except Exception:
             return None
