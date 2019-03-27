@@ -14,7 +14,9 @@ class AnalyzeRoot(Checker):
         self._provider = provider
 
     def check(self, repo):
-        return sum([self._check_license(), self._check_dockerfile(), self._check_gomod()])
+        checkers = [self._check_license(), self._check_dockerfile(), self._check_gomod()]
+        self.score.add_total_checks(len(checkers))
+        return sum(checkers)
 
     def start_message(self):
         """return message before start of checkers
