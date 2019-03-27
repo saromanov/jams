@@ -17,6 +17,10 @@ class AnalyzeDockerfile(Checker):
     def check(self, url):
         """ checks provides running of all sub-checks
         """
+        docker_file = self._get_file('Dockerfile', None)
+        if not docker_file:
+            print('!Dockerfile is not exist!')
+            return
         checks = [self._check_latest(), self._check_run_command()]
         self.score.add_total_checks(len(checks))
         return sum(checks)
