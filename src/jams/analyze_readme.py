@@ -64,7 +64,8 @@ class AnalyzeReadme(Checker):
         '''
         links = re.search("(?P<url>https?://[^\s]+)", myString).group("url")
         output('checking of brokens links')
-        return 0 if len(links) > 0 else 1
+        broken_links = filter(lambda x: requests.get(x).status_code > 299, links)
+        return 0 if len(broken_links) > 0 else 1
         
 
     def _check_overview(self):
