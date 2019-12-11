@@ -1,6 +1,7 @@
 from checker import Checker
 from output import output
 from task import Task
+import re
 
 
 class AnalyzeReadme(Checker):
@@ -55,6 +56,16 @@ class AnalyzeReadme(Checker):
         output('Checking correct title', result)
         self.score.add_check('Checking correct title', result)
         return 0 if result else 1
+    
+    def _check_links(self):
+        '''
+        this method checkes links on the README files
+        return false if readme contains broken links
+        '''
+        links = re.search("(?P<url>https?://[^\s]+)", myString).group("url")
+        output('checking of brokens links')
+        return 0 if len(links) > 0 else 1
+        
 
     def _check_overview(self):
         result = self._content.find(
