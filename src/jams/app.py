@@ -3,6 +3,7 @@ from gitlab_provider import GitlabProvider
 from github_provider import GithubProvider
 from jams import Jams
 import urllib.parse as urllib
+import argparse
 
 
 class App(object):
@@ -44,5 +45,12 @@ class App(object):
         return self._providers_inn[provider_name](token, url)
 
 
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--repo", help="path to the repo")
+args = parser.parse_args()
+repo = args.repo
+if repo is None:
+    raise Exception('repo is not defined')
 a = App('sss', '0.1')
-a.build('https://github.com/saromanov/godownload').report()
+a.build(repo).report()
