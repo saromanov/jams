@@ -43,6 +43,10 @@ class App(object):
             token = os.environ['GITLAB_TOKEN']
         return self._providers_inn[provider_name](token, url)
 
+def parse_yaml():
+    import yaml
+    with open("data.yaml", 'r') as stream:
+        data_loaded = yaml.safe_load(stream)
 def parse_args():
     import argparse
     parser = argparse.ArgumentParser()
