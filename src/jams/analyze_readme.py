@@ -3,7 +3,7 @@ from output import output
 from task import Task
 import requests
 from urlextract import URLExtract
-
+from spellchecker import SpellChecker
 
 class AnalyzeReadme(Checker):
     def __init__(self, content, url=None, provider=None):
@@ -24,7 +24,8 @@ class AnalyzeReadme(Checker):
                     self._check_quality_report(),
                     self._check_title(),
                     self._check_overview(),
-                    self._check_links()]
+                    self._check_links(),
+                    self._check_misspelling()]
         self.score.add_total_checks(len(checkers))
         return sum(checkers)
 
@@ -68,9 +69,21 @@ class AnalyzeReadme(Checker):
         links = extractor.find_urls(self._content)
         links = list(filter(lambda x: x.startswith('http') and '(' not in x and '\\n' not in x, links))
         broken_links = list(filter(lambda x: requests.get(x).status_code > 299, links))
-        output('checking of brokens links', len(broken_links) == 0)
+        output('Checking of brokens links', len(broken_links) == 0)
+        self.score.add_check('Repo contains broken links', broken_links)
         return 0 if len(broken_links) > 0 else 1
-        
+    
+    def _check_misspelling(self):
+        '''
+        Check of misspelling on the README files
+        '''
+        spell = SpellChecker()
+        words = spell.split_words(self._content)
+        new_words = []
+        for word in spell.unknown(words):
+            new_words.append((spell.correction(word), word))
+        self.score.add_check('Checking of misspelling words', len(new_words) == 0)
+        return 0 if len(new_words) > 0 else 1
 
     def _check_overview(self):
         result = self._content.find(

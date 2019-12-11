@@ -2,3 +2,4 @@ PyGithub
 python-gitlab
 requests
 urlextract
+pyspellchecker
