@@ -1,7 +1,8 @@
 from checker import Checker
 from output import output
 from task import Task
-import re
+import requests
+from urlextract import URLExtract
 
 
 class AnalyzeReadme(Checker):
@@ -22,7 +23,8 @@ class AnalyzeReadme(Checker):
         checkers = [self._check_ci(repo),
                     self._check_quality_report(),
                     self._check_title(),
-                    self._check_overview()]
+                    self._check_overview(),
+                    self._check_links()]
         self.score.add_total_checks(len(checkers))
         return sum(checkers)
 
@@ -62,9 +64,11 @@ class AnalyzeReadme(Checker):
         this method checkes links on the README files
         return false if readme contains broken links
         '''
-        links = re.search("(?P<url>https?://[^\s]+)", myString).group("url")
-        output('checking of brokens links')
-        broken_links = filter(lambda x: requests.get(x).status_code > 299, links)
+        extractor = URLExtract()
+        links = extractor.find_urls(self._content)
+        print(links)
+        broken_links = list(filter(lambda x: requests.get(x).status_code > 299, links))
+        output('checking of brokens links', len(broken_links) > 0)
         return 0 if len(broken_links) > 0 else 1
         
 
