@@ -45,4 +45,4 @@ class App(object):
 
 
 a = App('sss', '0.1')
-a.build('https://github.com/saromanov/godownload').report()
+a.build('https://github.com/saromanov/jams').report()

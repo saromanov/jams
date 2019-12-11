@@ -66,9 +66,10 @@ class AnalyzeReadme(Checker):
         '''
         extractor = URLExtract()
         links = extractor.find_urls(self._content)
-        print(links)
+        links = list(filter(lambda x: x.startswith('http') and '(' not in x, links))
         broken_links = list(filter(lambda x: requests.get(x).status_code > 299, links))
-        output('checking of brokens links', len(broken_links) > 0)
+        print(broken_links)
+        output('checking of brokens links', len(broken_links) == 0)
         return 0 if len(broken_links) > 0 else 1
         
 
