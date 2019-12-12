@@ -9,9 +9,16 @@ class App(object):
     def __init__(self, description, version, command_manager=None):
         self.command_manager = command_manager
         self._provider = None
+        self._checkers = []
         self._description = description
         self._providers_inn = dict(
             github=GithubProvider, gitlab=GitlabProvider)
+    
+    def add_checkers_from_config(self, checkers):
+        '''
+        adding checkers manually
+        '''
+        self._checkers = checkers
 
     def build(self, url):
         ''' build creates a new object
@@ -53,6 +60,7 @@ def parse_yaml(path):
         if e.errno in (errno.ENOENT, errno.EISDIR):
             return
         e.strerror = "Unable to load configuration file {0}".Format(e.strerror)
+    return data_loaded
 
 def parse_args():
     import argparse
@@ -66,9 +74,10 @@ def parse_args():
         raise Exception('Repo or config is not provided')
     a = App('sss', '0.1')
     if repo is not None:
-       a.build(repo).report()
+        a.build(repo).report()
     if config is not None:
-        parse_yaml(config)
+        config_parsed = parse_yaml(config)
+        a.add_checkers_from_config(config)
 
 if __name__ == '__main__':
     parse_args()
