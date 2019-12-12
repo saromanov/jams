@@ -23,17 +23,11 @@ class AnalyzeReadme(Checker):
         self.score.add_total_checks(len(checkers))
         return sum(checkers)
     
-    def get_checkers(self):
-        '''
-        retrun only methods with starts with _check
-        '''
-        return list(filter(lambda x: x.startswith('_check'), dir(self)))
-    
     def _make_checkers(self, **kwargs):
         names = kwargs.get('names')
         if names is None:
             return self._default_checkers()
-        self.get_checkers()/
+        self._get_checkers()/
     
     def _default_checkers(self):
         return [self._check_ci(),

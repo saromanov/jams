@@ -33,3 +33,9 @@ class Checker:
         return list of names of checkers
         '''
         raise NotImplementedError
+    
+    def _get_checkers(self):
+        '''
+        retrun only methods with starts with _check
+        '''
+        return list(filter(lambda x: x.startswith('_check'), dir(self)))
