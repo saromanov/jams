@@ -28,6 +28,9 @@ class AnalyzeReadme(Checker):
                     self._check_misspelling()]
         self.score.add_total_checks(len(checkers))
         return sum(checkers)
+    
+    def get_checkers(self):
+        print(dir(self))
 
     def _check_ci(self, repo):
         '''

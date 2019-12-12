@@ -3,15 +3,8 @@ from analyze_dockerfile import AnalyzeDockerfile
 from analyze_root import AnalyzeRoot
 from language import GoLang, PythonLang
 
-
-class DetectLanguageException(Exception):
-    pass
-
-
-class NotSupportedLanguageException(Exception):
-    pass
-
-
+GO_LANG = 'Go'
+PYTHON_LANG = 'Python'
 class Jams:
     ''' Jams class provides implementation of the user logic
         all handling insede the app. Getting files, analyzing, etc
@@ -34,9 +27,9 @@ class Jams:
         self.check_readme()
 
     def _select_language(self, lang):
-        if lang == 'Go':
+        if lang == GO_LANG:
             return GoLang(self._provider)
-        elif lang == 'Python':
+        elif lang == PYTHON_LANG:
             return PythonLang(self._provider)
         else:
             raise NotSupportedLanguageException('language not supported')

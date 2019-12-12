@@ -27,3 +27,9 @@ class Checker:
         before start of checkers
         '''
         raise NotImplementedError
+    
+    def get_checkers(self):
+        '''
+        return list of names of checkers
+        '''
+        raise NotImplementedError
