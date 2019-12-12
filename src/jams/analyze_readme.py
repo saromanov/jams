@@ -19,16 +19,21 @@ class AnalyzeReadme(Checker):
     def check(self, repo):
         """check_ci provides checking of README.md
         """
-        checkers = self._make_checkers()
+        checkers = self._make_checkers(names='a')
         self.score.add_total_checks(len(checkers))
         return sum(checkers)
     
     def get_checkers(self):
-        print(dir(self))
+        '''
+        retrun only methods with starts with _check
+        '''
+        return list(filter(lambda x: x.startswith('_check'), dir(self)))
     
-    def _make_checkers(self, names):
-        if len(names) == 0:
+    def _make_checkers(self, **kwargs):
+        names = kwargs.get('names')
+        if names is None:
             return self._default_checkers()
+        self.get_checkers()/
     
     def _default_checkers(self):
         return [self._check_ci(),

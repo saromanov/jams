@@ -10,21 +10,33 @@ class Jams:
         all handling insede the app. Getting files, analyzing, etc
     '''
 
-    def __init__(self, url, provider):
+    def __init__(self, url, provider, *args, **kwargs):
         self._provider = provider
         self._url = url
+        self._config = kwargs.get('config')
         self._checkers = self._make_checkers()
         self._lang = self._select_language(self.detect_language())
     
     def _make_checkers(self):
-        """ returns registered checkers
+        """ 
+        returns registered checkers
+        if config is not empty, then adding that to the checkers
         """
-        return [AnalyzeReadme, AnalyzeDockerfile, AnalyzeRoot]
+        if self._config is None:
+            return [AnalyzeReadme, AnalyzeDockerfile, AnalyzeRoot]
+        checkers = []
+        if 'readme' in self._config:
+            checkers.append(AnalyzeReadme)
+        if 'dockerfile' in self._config:
+            checkers.append(AnalyzeDockerfile)
+        if 'root' in self._config:
+            checker.append(AnalyzeRoot)
+        return checkers
 
     def report(self):
         """ report provides starting of registered checkers
         """
-        self.check_readme()
+        self._run()
 
     def _select_language(self, lang):
         if lang == GO_LANG:
@@ -48,7 +60,7 @@ class Jams:
         """
         self._checkers.append(check)
 
-    def check_readme(self):
+    def _run(self):
         ''' return content of the README.md file
         '''
         content_file = self._get_readme()
