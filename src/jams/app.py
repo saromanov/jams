@@ -43,17 +43,17 @@ class App(object):
             token = os.environ['GITLAB_TOKEN']
         return self._providers_inn[provider_name](token, url)
 
-def parse_yaml():
+def parse_yaml(path):
     import yaml
     try:
-        with open("config.yml", 'r') as stream:
+        with open(path, 'r') as stream:
             data_loaded = yaml.safe_load(stream)
             print(data_loaded)
     except IOError as e:
         if e.errno in (errno.ENOENT, errno.EISDIR):
-                return
+            return
         e.strerror = "Unable to load configuration file {0}".Format(e.strerror)
-            raise
+
 def parse_args():
     import argparse
     parser = argparse.ArgumentParser()
@@ -65,7 +65,10 @@ def parse_args():
     if repo is None and config is None:
         raise Exception('Repo or config is not provided')
     a = App('sss', '0.1')
-    a.build(repo).report()
+    if repo is not None:
+       a.build(repo).report()
+    if config is not None:
+        parse_yaml(config)
 
 if __name__ == '__main__':
     parse_args()
