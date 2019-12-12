@@ -18,19 +18,25 @@ class AnalyzeReadme(Checker):
 
     def check(self, repo):
         """check_ci provides checking of README.md
-        containce badge with ci provider
         """
-        checkers = [self._check_ci(repo),
-                    self._check_quality_report(),
-                    self._check_title(),
-                    self._check_overview(),
-                    self._check_links(),
-                    self._check_misspelling()]
+        checkers = self._make_checkers()
         self.score.add_total_checks(len(checkers))
         return sum(checkers)
     
     def get_checkers(self):
         print(dir(self))
+    
+    def _make_checkers(self, names):
+        if len(names) == 0:
+            return self._default_checkers()
+    
+    def _default_checkers(self):
+        return [self._check_ci(),
+                    self._check_quality_report(),
+                    self._check_title(),
+                    self._check_overview(),
+                    self._check_links(),
+                    self._check_misspelling()]
 
     def _check_ci(self, repo):
         '''
