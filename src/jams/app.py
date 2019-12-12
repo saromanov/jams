@@ -45,16 +45,25 @@ class App(object):
 
 def parse_yaml():
     import yaml
-    with open("data.yaml", 'r') as stream:
-        data_loaded = yaml.safe_load(stream)
+    try:
+        with open("config.yml", 'r') as stream:
+            data_loaded = yaml.safe_load(stream)
+            print(data_loaded)
+    except IOError as e:
+        if e.errno in (errno.ENOENT, errno.EISDIR):
+                return
+        e.strerror = "Unable to load configuration file {0}".Format(e.strerror)
+            raise
 def parse_args():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo", help="path to the repo")
+    parser.add_argument("--config", help="path to the repo")
     args = parser.parse_args()
     repo = args.repo
-    if repo is None:
-        raise Exception('repo is not defined')
+    config = args.config
+    if repo is None and config is None:
+        raise Exception('Repo or config is not provided')
     a = App('sss', '0.1')
     a.build(repo).report()
 
