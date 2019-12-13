@@ -24,10 +24,14 @@ class AnalyzeReadme(Checker):
         return sum(checkers)
     
     def _make_checkers(self, **kwargs):
+        '''
+        creating list of checkers for session
+        '''
         names = kwargs.get('names')
         if names is None:
             return self._default_checkers()
-        self._get_checkers()/
+        checkers = list(map(lambda x: (x, x[7:]), self._get_checkers()))
+        print(checkers)
     
     def _default_checkers(self):
         return [self._check_ci(),
