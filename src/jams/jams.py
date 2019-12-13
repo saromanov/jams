@@ -69,7 +69,7 @@ class Jams:
         for checker in self._checkers:
             r = checker(content_file, provider=self._provider)
             r.start_message()
-            r.check(self._url)
+            r.check(self._url, config=self._config)
         return content_file
 
     def _get_readme(self):
