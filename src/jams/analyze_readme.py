@@ -25,6 +25,8 @@ class AnalyzeReadme(Checker):
         return sum(checkers)
     
     def get_checkers_names_from_cfg(self, config):
+        if config is None:
+            return
         if 'checkers' not in config:
             return None
         if 'readme' not in config['checkers']:
@@ -42,7 +44,7 @@ class AnalyzeReadme(Checker):
         print(checkers)
     
     def _default_checkers(self):
-        return [self._check_ci(),
+        return [
                     self._check_quality_report(),
                     self._check_title(),
                     self._check_overview(),
