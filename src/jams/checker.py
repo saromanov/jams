@@ -4,6 +4,8 @@ from score import Score
 class Checker:
     """
     This class defines base class for analyze content
+    Every method for check should be named as
+    _check_something
     """
 
     def __init__(self, content, task_name='default', url=None):
@@ -17,7 +19,7 @@ class Checker:
 
     def check(self, repo):
         '''
-        check is a main method for making analyzation
+        check is a main method for making anallize
         of content
         '''
         raise NotImplementedError
