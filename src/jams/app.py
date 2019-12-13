@@ -56,7 +56,6 @@ def parse_yaml(path):
     try:
         with open(path, 'r') as stream:
             data_loaded = yaml.safe_load(stream)
-            print(data_loaded)
     except IOError as e:
         if e.errno in (errno.ENOENT, errno.EISDIR):
             return

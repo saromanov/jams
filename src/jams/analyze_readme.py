@@ -78,7 +78,7 @@ class AnalyzeReadme(Checker):
         project title
         '''
         result = self._content.startswith('# ')
-        output('Checking correct title', result)
+        output('Checking correct title', result, details='README file should starts with #')
         self.score.add_check('Checking correct title', result)
         return 0 if result else 1
     
