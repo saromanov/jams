@@ -79,7 +79,7 @@ def parse_args():
     if config is not None:
         config_parsed = parse_yaml(config)
         url = config_parsed['url']
-        a.add_checkers_from_config(config)
+        a.add_checkers_from_config(config_parsed)
         a.build(url).report()
 
 if __name__ == '__main__':

@@ -24,12 +24,13 @@ class Jams:
         """
         if self._config is None or 'checkers' not in self._config:
             return [AnalyzeReadme, AnalyzeDockerfile, AnalyzeRoot]
+        checker = self._config['checkers']
         checkers = []
-        if 'readme' in self._config:
+        if 'readme' in checker:
             checkers.append(AnalyzeReadme)
-        if 'dockerfile' in self._config:
+        if 'dockerfile' in checker:
             checkers.append(AnalyzeDockerfile)
-        if 'root' in self._config:
+        if 'root' in checker:
             checker.append(AnalyzeRoot)
         return checkers
 

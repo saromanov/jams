@@ -40,8 +40,8 @@ class AnalyzeReadme(Checker):
         names = kwargs.get('names')
         if names is None:
             return self._default_checkers()
-        checkers = list(map(lambda x: (x, x[7:]), self._get_checkers()))
-        print(checkers)
+        checkers = list(filter(lambda x: x[7:] in names, self._get_checkers()))
+        return list(map(lambda x: getattr(self, x)(), checkers))
     
     def _default_checkers(self):
         return [
