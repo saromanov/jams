@@ -10,10 +10,10 @@ class Jams:
         all handling insede the app. Getting files, analyzing, etc
     '''
 
-    def __init__(self, url, provider, *args, **kwargs):
+    def __init__(self, url, provider, config, *args, **kwargs):
         self._provider = provider
         self._url = url
-        self._config = kwargs.get('config')
+        self._config = config
         self._checkers = self._make_checkers()
         self._lang = self._select_language(self.detect_language())
     
@@ -31,7 +31,6 @@ class Jams:
             checkers.append(AnalyzeDockerfile)
         if 'root' in self._config:
             checker.append(AnalyzeRoot)
-        print('CHECKERS: ', checkers)
         return checkers
 
     def report(self):

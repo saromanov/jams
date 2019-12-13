@@ -10,7 +10,7 @@ class App(object):
         self.command_manager = command_manager
         self._provider = None
         self._checkers = []
-        self._config = None
+        self._config = {}
         self._description = description
         self._providers_inn = dict(
             github=GithubProvider, gitlab=GitlabProvider)
@@ -31,7 +31,7 @@ class App(object):
             raise Exception('Url path is not defined')
         provider = self._make_provider(url.hostname.split('.')[0], url.path[1:])
         path = url.path[1:]
-        return Jams(path, provider, config=self._config)
+        return Jams(path, provider, self._config)
 
     def _parse_url(self, url):
         ''' parsing of the input url
