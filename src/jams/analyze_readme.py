@@ -100,10 +100,11 @@ class AnalyzeReadme(Checker):
         Check of misspelling on the README files
         '''
         spell = SpellChecker()
-        words = spell.split_words(self._content)
+        words = list(filter(lambda x: len(x) > 6 and len(x)< 10, spell.split_words(self._content)))
         new_words = []
         for word in spell.unknown(words):
             new_words.append((spell.correction(word), word))
+        output('Checking of misspelling', len(new_words) == 0, details=new_words)
         self.score.add_check('Checking of misspelling words', len(new_words) == 0)
         return 0 if len(new_words) > 0 else 1
 

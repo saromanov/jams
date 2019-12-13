@@ -1,8 +1,10 @@
-def output(message, passed):
+def output(message, passed, **kwargs):
     '''
     output provides response for checker
     '''
     line = '[+]'
+    details = ''
     if not passed:
         line = '[x]'
-    print('{0}: {1}'.format(line, message))
+        details = kwargs.get('details')
+    print('{0}: {1}\n{2}'.format(line, message, details))
