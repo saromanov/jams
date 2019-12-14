@@ -36,6 +36,12 @@ class Checker:
         '''
         raise NotImplementedError
     
+    def get_score(self):
+        '''
+        return score after checks
+        '''
+        return 0
+    
     def _get_checkers(self):
         '''
         retrun only methods with starts with _check
