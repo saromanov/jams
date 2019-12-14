@@ -15,18 +15,9 @@ class AnalyzeRoot(Checker):
 
     def check(self, repo, **kwargs):
         config = kwargs.get('config')
-        checkers = self._make_checkers(names=self.get_checkers_names_from_cfg(config))
+        checkers = self._make_checkers(names=self._get_checkers_names_from_cfg(config, 'root'))
         self.score.add_total_checks(len(checkers))
         return sum(checkers)
-    
-    def get_checkers_names_from_cfg(self, config):
-        if config is None:
-            return
-        if 'checkers' not in config:
-            return None
-        if 'root' not in config['checkers']:
-            return None
-        return config['checkers']['root']
     
     def _default_checkers(self):
         return [
