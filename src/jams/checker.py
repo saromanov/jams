@@ -54,4 +54,13 @@ class Checker:
             return self._default_checkers()
         checkers = list(filter(lambda x: x[7:] in names, self._get_checkers()))
         return list(map(lambda x: getattr(self, x)(), checkers))
+    
+    def _get_checkers_names_from_cfg(self, config, name):
+        if config is None:
+            return
+        if 'checkers' not in config:
+            return None
+        if name not in config['checkers']:
+            return None
+        return config['checkers'][name]
 
