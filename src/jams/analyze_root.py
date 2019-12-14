@@ -35,7 +35,7 @@ class AnalyzeRoot(Checker):
         """
         msg = 'Checking of the license'
         result = 0 if not self._get_license() else 1
-        output(msg, result)
+        output(msg, result, details='LICENCE file is not found')
         self.score.add_check(msg, result)
         return result
     
@@ -54,7 +54,7 @@ class AnalyzeRoot(Checker):
         '''
         msg = 'Checking of the Dockerfile at the root'
         result = 0 if not self._get_dockerfile() else 1
-        output(msg, result)
+        output(msg, result, details='Dockerfile is not found')
         self.score.add_check(msg, result)
         return result
     
@@ -64,7 +64,7 @@ class AnalyzeRoot(Checker):
         '''
         msg = 'Checking of the .gitignore at the root'
         result = 0 if not self._get_gitignore() else 1
-        output(msg, result)
+        output(msg, result, '.gitignore file is not found')
         self.score.add_check(msg, result)
         return result
     
