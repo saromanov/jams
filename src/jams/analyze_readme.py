@@ -104,7 +104,8 @@ class AnalyzeReadme(Checker):
         new_words = []
         for word in spell.unknown(words):
             new_words.append((spell.correction(word), word))
-        output('Checking of misspelling', len(new_words) == 0, details=new_words)
+        details_output = [] if len(new_words) == 0 else '\n'.join(map(lambda x: '{0} -> {1}'.format(x[1],x[0]), new_words))
+        output('Checking of misspelling', len(new_words) == 0, details=details_output)
         self.score.add_check('Checking of misspelling words', len(new_words) == 0)
         return 0 if len(new_words) > 0 else 1
 
