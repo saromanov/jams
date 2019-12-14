@@ -41,3 +41,17 @@ class Checker:
         retrun only methods with starts with _check
         '''
         return list(filter(lambda x: x.startswith('_check'), dir(self)))
+    
+    def _default_checkers(self):
+        return []
+    
+    def _make_checkers(self, **kwargs):
+        '''
+        creating list of checkers for session
+        '''
+        names = kwargs.get('names')
+        if names is None:
+            return self._default_checkers()
+        checkers = list(filter(lambda x: x[7:] in names, self._get_checkers()))
+        return list(map(lambda x: getattr(self, x)(), checkers))
+
