@@ -13,7 +13,8 @@ class AnalyzeRoot(Checker):
         self._content = content
         self._provider = provider
 
-    def check(self, repo):
+    def check(self, repo, **kwargs):
+        config = kwargs.get('config')
         checkers = [self._check_license(), self._check_dockerfile(), self._check_gomod()]
         self.score.add_total_checks(len(checkers))
         return sum(checkers)

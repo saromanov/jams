@@ -31,7 +31,7 @@ class Jams:
         if 'dockerfile' in checker:
             checkers.append(AnalyzeDockerfile)
         if 'root' in checker:
-            checker.append(AnalyzeRoot)
+            checkers.append(AnalyzeRoot)
         return checkers
 
     def report(self):
