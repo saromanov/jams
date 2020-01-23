@@ -1,7 +1,7 @@
-from analyze_readme import AnalyzeReadme
-from analyze_dockerfile import AnalyzeDockerfile
-from analyze_root import AnalyzeRoot
-from language import GoLang, PythonLang
+from analyzers.readme import AnalyzeReadme
+from analyzers.dockerfile import AnalyzeDockerfile
+from analyzers.root import AnalyzeRoot
+from analyzers.language import GoLang, PythonLang
 
 GO_LANG = 'Go'
 PYTHON_LANG = 'Python'

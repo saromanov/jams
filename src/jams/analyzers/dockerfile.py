@@ -14,7 +14,7 @@ class AnalyzeDockerfile(Checker):
         """
         print('Checking of the Dockerfile file\n')
     
-    def check(self, url):
+    def check(self, url, **kwargs):
         """ checks provides running of all sub-checks
         """
         docker_file = self._get_file('Dockerfile', None)
