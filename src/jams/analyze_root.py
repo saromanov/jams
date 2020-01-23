@@ -22,8 +22,8 @@ class AnalyzeRoot(Checker):
     def _default_checkers(self):
         return [
                     self._check_license(),
-                    self._check_dockerfile(),
-                    self._check_gomod()]
+                    self._check_dockerfile()
+                ]
 
     def start_message(self):
         """return message before start of checkers
@@ -36,16 +36,6 @@ class AnalyzeRoot(Checker):
         msg = 'Checking of the license'
         result = 0 if not self._get_license() else 1
         output(msg, result, details='LICENCE file is not found')
-        self.score.add_check(msg, result)
-        return result
-    
-    def _check_gomod(self):
-        """ provides checking if go.mod is exist
-        at the directory
-        """
-        msg = 'Checking of go.mod'
-        result = 0 if not self._get_gomod() else 1
-        output(msg, result)
         self.score.add_check(msg, result)
         return result
 

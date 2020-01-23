@@ -14,18 +14,19 @@ class Jams:
         self._provider = provider
         self._url = url
         self._config = config
+        self._specified_checkers = self._select_language(self.detect_language())
         self._checkers = self._make_checkers()
-        self._lang = self._select_language(self.detect_language())
     
     def _make_checkers(self):
         """ 
         returns registered checkers
         if config is not empty, then adding that to the checkers
         """
+        checkers = [self._specified_checkers]
         if self._config is None or 'checkers' not in self._config:
-            return [AnalyzeReadme, AnalyzeDockerfile, AnalyzeRoot]
+            checkers.extend([AnalyzeReadme, AnalyzeDockerfile, AnalyzeRoot])
+            return checkers
         checker = self._config['checkers']
-        checkers = []
         if 'readme' in checker:
             checkers.append(AnalyzeReadme)
         if 'dockerfile' in checker:
@@ -40,10 +41,12 @@ class Jams:
         self._run()
 
     def _select_language(self, lang):
+        ''' getting specified checkers for the language
+        '''
         if lang == GO_LANG:
-            return GoLang(self._provider)
+            return GoLang
         elif lang == PYTHON_LANG:
-            return PythonLang(self._provider)
+            return PythonLang
         else:
             raise NotSupportedLanguageException('language is not supported')
 
