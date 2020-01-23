@@ -17,7 +17,7 @@ class Checker:
     def __str__(self):
         return self._content
 
-    def check(self, repo):
+    def check(self, repo, *args, **kwargs):
         '''
         check is a main method for making anallize
         of content

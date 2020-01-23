@@ -72,7 +72,7 @@ def parse_args():
     config = args.config
     if repo is None and config is None:
         raise Exception('Repo or config is not provided')
-    a = App('sss', '0.1')
+    a = App('check', '0.1')
     if repo is not None:
         a.build(repo).report()
     if config is not None:
