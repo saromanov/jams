@@ -45,7 +45,7 @@ class Jams:
         elif lang == PYTHON_LANG:
             return PythonLang(self._provider)
         else:
-            raise NotSupportedLanguageException('language not supported')
+            raise NotSupportedLanguageException('language is not supported')
 
     def detect_language(self):
         '''provides detecting of the language by request to the
@@ -79,7 +79,7 @@ class Jams:
         with .md, .rst extensions
         '''
         try:
-            for path in ['.md', 'rst']:
+            for path in ['.md', '.rst', 'txt']:
                 content_file = self._provider.get_content_file(
                     self._url, 'README{0}'.format(path))
                 if content_file is None:

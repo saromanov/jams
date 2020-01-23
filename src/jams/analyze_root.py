@@ -78,15 +78,15 @@ class AnalyzeRoot(Checker):
         '''
         return self._get_file('Dockerfile', self._url)
     
-    def _get_dockerfile(self):
+    def _get_gitignore(self):
         '''trying to get .gitignore
         '''
         return self._get_file('.gitignore', self._url)
     
-    def _get_license(self):
+    def _get_license(self, name='LICENCE'):
         '''trying to get license from repo
         '''
-        return self._get_file('LICENSE', None)
+        return self._get_file(name, None)
     
     def _get_file(self, name, url):
         """trying to get file
