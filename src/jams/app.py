@@ -76,9 +76,9 @@ def parse_args():
     if repo is None and config is None:
         raise Exception('Repo or config is not provided')
     a = App('check', '0.1')
-    if repo is not None:
+    if repo:
         a.build(repo).report()
-    if config is not None:
+    if config:
         config_parsed = parse_yaml(config)
         url = config_parsed['url']
         a.add_checkers_from_config(config_parsed)
