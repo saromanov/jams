@@ -69,7 +69,8 @@ def parse_args():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo", help="path to the repo")
-    parser.add_argument("--config", help="path to the repo")
+    parser.add_argument("--config", help="path to the config")
+    parser.add_argument("--not-include", help="not include of checks")
     args = parser.parse_args()
     repo = args.repo
     config = args.config
