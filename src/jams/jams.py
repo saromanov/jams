@@ -70,11 +70,13 @@ class Jams:
         content_file = self._get_readme()
         if content_file is None:
             return ''
+        score = 0
         for checker in self._checkers:
             r = checker(content_file, provider=self._provider)
             r.start_message()
             r.check(self._url, config=self._config)
-            print('Score: ', r.get_score())
+            score += r.get_score()
+        print('Score: {0} of {1}'.format(score, len(self._checkers)))
         return content_file
 
     def _get_readme(self):
