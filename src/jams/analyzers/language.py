@@ -67,3 +67,40 @@ class PythonLang(Checker):
 
     def __init__(self, provider):
         Checker.__init__(self, provider)
+    
+    def start_message(self):
+        """return message before start of checkers
+        """
+        print('\n>Checking of Python repo\n')
+    
+    def check(self, repo, **kwargs):
+        """check provides checking of the repo
+        """
+        config = kwargs.get('config')
+        checkers = self._make_checkers(names=self._get_checkers_names_from_cfg(config, 'readme'))
+        self.score.add_total_checks(len(checkers))
+        return sum(checkers)
+    
+    def _default_checkers(self):
+        return [
+                    self._check_setup()
+                ]
+    
+    def _check_setup(self):
+        """ provides checking if setup.py if exist
+        at the directory
+        """
+        msg = 'Checking of setup.py'
+        result = 0 if not self._get_file('setup.py', None) else 1
+        output(msg, result)
+        self.score.add_check(msg, result)
+        return result
+    
+    def _get_file(self, name, url):
+        """trying to get file
+        """
+        try:
+            return self._provider.get_content_file(
+                url, name)
+        except Exception:
+            return None
