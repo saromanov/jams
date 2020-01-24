@@ -28,7 +28,7 @@ class AnalyzeRoot(Checker):
     def start_message(self):
         """return message before start of checkers
         """
-        print('\nChecking of the root structure\n')
+        print('\n>Checking of the root structure\n')
     
     def _check_license(self):
         """ returns 1 if repo contance license

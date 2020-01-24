@@ -24,5 +24,7 @@ class Score:
     def result(self):
         '''retruns result from all checks
         '''
+        value = 0
         for k, v in self._checks.items():
-            print(k, v)
+            value+=v
+        return value

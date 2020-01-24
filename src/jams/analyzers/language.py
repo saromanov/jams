@@ -22,7 +22,7 @@ class GoLang(Checker):
     def start_message(self):
         """return message before start of checkers
         """
-        print('\nChecking of Golang repo\n')
+        print('\n>Checking of Golang repo\n')
     
     def check(self, repo, **kwargs):
         """check_ci provides checking of README.md

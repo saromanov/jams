@@ -14,7 +14,7 @@ class AnalyzeReadme(Checker):
     def start_message(self):
         """return message before start of readme checks
         """
-        print('Checking of the README file\n')
+        print('>Checking of the README file\n')
 
     def check(self, repo, **kwargs):
         """check_ci provides checking of README.md
