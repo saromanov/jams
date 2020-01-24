@@ -74,7 +74,7 @@ class Jams:
             r = checker(content_file, provider=self._provider)
             r.start_message()
             r.check(self._url, config=self._config)
-            print(r.get_score())
+            print('Score: ', r.get_score())
         return content_file
 
     def _get_readme(self):

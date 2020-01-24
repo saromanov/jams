@@ -40,7 +40,7 @@ class Checker:
         '''
         return score after checks
         '''
-        return 0
+        return self.score.result()
     
     def _get_checkers(self):
         '''

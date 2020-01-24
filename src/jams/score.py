@@ -5,7 +5,6 @@
     Implementing score method for calculation of score from checkers
 """
 
-
 class Score:
     def __init__(self):
         self._score = 0
@@ -24,7 +23,4 @@ class Score:
     def result(self):
         '''retruns result from all checks
         '''
-        value = 0
-        for k, v in self._checks.items():
-            value+=v
-        return value
+        return sum(self._checks.values())
