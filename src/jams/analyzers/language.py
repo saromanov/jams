@@ -37,7 +37,8 @@ class GoLang(Checker):
     
     def _default_checkers(self):
         return [
-                    self._check_gomod()
+                    self._check_gomod(),
+                    self._check_godoc_link()
                 ]
     
     def _check_gomod(self):
@@ -49,6 +50,20 @@ class GoLang(Checker):
         output(msg, result)
         self.score.add_check(msg, result)
         return result
+    
+    def _check_godoc_link(self):
+        """ provides checking of link to gomod
+        on README.md
+        """
+        msg = 'Checking of godoc link'
+        result = 0
+        readme = self._get_file('README.md', None)
+        if 'godoc' in readme.split():
+            result = 1
+        output(msg, result)
+        self.score.add_check(msg, result)
+        return result
+
     
     def _check_modules(self):
         return self._get_file('go.mod', None)
