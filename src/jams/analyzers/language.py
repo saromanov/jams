@@ -96,7 +96,7 @@ class PythonLang(Checker):
         self.score.add_check(msg, result)
         return result
 
-     def _check_toxini(self):
+    def _check_toxini(self):
         """ provides checking if tox.ini is exist
         at the directory
         """

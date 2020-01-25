@@ -22,10 +22,9 @@ class Jams:
         returns registered checkers
         if config is not empty, then adding that to the checkers
         """
-        checkers = [self._specified_checkers]
         if self._config is None or 'checkers' not in self._config:
-            checkers.extend([AnalyzeReadme, AnalyzeDockerfile, AnalyzeRoot])
-            return checkers
+            return [self._specified_checkers, AnalyzeReadme, AnalyzeDockerfile, AnalyzeRoot]
+        checkers = []
         checker = self._config['checkers']
         if 'readme' in checker:
             checkers.append(AnalyzeReadme)
