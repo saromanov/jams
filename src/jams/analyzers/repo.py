@@ -30,12 +30,12 @@ class AnalyzeRepo(Checker):
     def _default_checkers(self):
         return []
     
-    def _check_issues(self):
+    def _check_open_issues(self):
         """ provides checking if open issues is exist
         at the directory
         """
-        msg = 'Checking of go.mod'
-        result = 0 if not self._check_modules() else 1
+        msg = 'Checking of open issues'
+        result = 0 if not self._provider.get_open_issues() else 1
         output(msg, result)
         self.score.add_check(msg, result)
         return result
