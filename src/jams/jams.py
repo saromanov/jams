@@ -2,6 +2,7 @@ from analyzers.readme import AnalyzeReadme
 from analyzers.dockerfile import AnalyzeDockerfile
 from analyzers.root import AnalyzeRoot
 from analyzers.language import GoLang, PythonLang
+from analyzers.repo import AnalyzeRepo
 
 GO_LANG = 'Go'
 PYTHON_LANG = 'Python'
@@ -34,6 +35,8 @@ class Jams:
             checkers.append(AnalyzeRoot)
         if 'golang' in checker:
             checkers.append(GoLang)
+        if 'repo' in checker:
+            checkers.append(AnalyzeRepo)
         return checkers
 
     def report(self):
