@@ -33,6 +33,8 @@ class Jams:
             checkers.append(AnalyzeDockerfile)
         if 'root' in checker:
             checkers.append(AnalyzeRoot)
+        if 'golang' in checker:
+            checkers.append(GoLang)
         return checkers
 
     def report(self):
