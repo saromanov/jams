@@ -12,10 +12,13 @@ class AnalyzeRoot(Checker):
         self._provider = provider
         self._content = content
         self._provider = provider
+    
+    def name(self):
+        return 'root'
 
     def check(self, repo, **kwargs):
         config = kwargs.get('config')
-        checkers = self._make_checkers(names=self._get_checkers_names_from_cfg(config, 'root'))
+        checkers = self._make_checkers(names=self._get_checkers_names_from_cfg(config))
         self.score.add_total_checks(len(checkers))
         return sum(checkers)
     

@@ -9,10 +9,13 @@ class AnalyzeDockerfile(Checker):
         self._content = str(content)
         super().__init__(str(content), url=url)
     
+    def name(self):
+        return 'dockerfile'
+    
     def start_message(self):
         """return message before start of docker checks
         """
-        print('Checking of the Dockerfile file\n')
+        print('>Checking of the Dockerfile file\n')
     
     def check(self, url, **kwargs):
         """ checks provides running of all sub-checks

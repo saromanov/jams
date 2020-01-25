@@ -36,6 +36,12 @@ class Checker:
         '''
         raise NotImplementedError
     
+    def name(self):
+        '''
+        return name of the checker
+        '''
+        raise NotImplementedError
+    
     def get_score(self):
         '''
         return score after checks
@@ -61,7 +67,8 @@ class Checker:
         checkers = list(filter(lambda x: x[7:] in names, self._get_checkers()))
         return list(map(lambda x: getattr(self, x)(), checkers))
     
-    def _get_checkers_names_from_cfg(self, config, name):
+    def _get_checkers_names_from_cfg(self, config):
+        name = self.name()
         if config is None:
             return
         if 'checkers' not in config:

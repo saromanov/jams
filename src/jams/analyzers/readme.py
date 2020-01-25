@@ -10,6 +10,9 @@ class AnalyzeReadme(Checker):
         self._content = str(content)
         self._ci = ['https://travis-ci.org', 'https://drone.io/']
         super().__init__(str(content), url=url)
+    
+    def name(self):
+        return 'readme'
 
     def start_message(self):
         """return message before start of readme checks
@@ -20,7 +23,7 @@ class AnalyzeReadme(Checker):
         """check_ci provides checking of README.md
         """
         config = kwargs.get('config')
-        checkers = self._make_checkers(names=self._get_checkers_names_from_cfg(config, 'readme'))
+        checkers = self._make_checkers(names=self._get_checkers_names_from_cfg(config))
         self.score.add_total_checks(len(checkers))
         return sum(checkers)
     

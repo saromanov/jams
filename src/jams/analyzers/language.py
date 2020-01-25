@@ -19,6 +19,9 @@ class GoLang(Checker):
         self._url = url
         Checker.__init__(self, provider)
     
+    def name(self):
+        return 'golang'
+    
     def start_message(self):
         """return message before start of checkers
         """
@@ -28,7 +31,7 @@ class GoLang(Checker):
         """check_ci provides checking of README.md
         """
         config = kwargs.get('config')
-        checkers = self._make_checkers(names=self._get_checkers_names_from_cfg(config, 'readme'))
+        checkers = self._make_checkers(names=self._get_checkers_names_from_cfg(config))
         self.score.add_total_checks(len(checkers))
         return sum(checkers)
     
@@ -68,6 +71,9 @@ class PythonLang(Checker):
     def __init__(self, provider):
         Checker.__init__(self, provider)
     
+    def name(self):
+        return 'python'
+    
     def start_message(self):
         """return message before start of checkers
         """
@@ -77,7 +83,7 @@ class PythonLang(Checker):
         """check provides checking of the repo
         """
         config = kwargs.get('config')
-        checkers = self._make_checkers(names=self._get_checkers_names_from_cfg(config, 'readme'))
+        checkers = self._make_checkers(names=self._get_checkers_names_from_cfg(config))
         self.score.add_total_checks(len(checkers))
         return sum(checkers)
     
