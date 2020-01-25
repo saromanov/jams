@@ -25,7 +25,7 @@ class AnalyzeRoot(Checker):
     def _default_checkers(self):
         return [
                     self._check_license(),
-                    self._check_dockerfile()
+                    self._check_gitignore()
                 ]
 
     def start_message(self):
@@ -60,11 +60,6 @@ class AnalyzeRoot(Checker):
         output(msg, result, '.gitignore file is not found')
         self.score.add_check(msg, result)
         return result
-    
-    def _get_gomod(self):
-        """trying to get go.mod
-        """
-        return self._get_file('go.mod', None)
 
     def _get_dockerfile(self):
         '''trying to get Dockerfile
@@ -76,10 +71,10 @@ class AnalyzeRoot(Checker):
         '''
         return self._get_file('.gitignore', self._url)
     
-    def _get_license(self, name='LICENCE'):
+    def _get_license(self):
         '''trying to get license from repo
         '''
-        return self._get_file(name, None)
+        return self._get_file('LICENSE', self._url)
     
     def _get_file(self, name, url):
         """trying to get file
