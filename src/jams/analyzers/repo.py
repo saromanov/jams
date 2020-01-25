@@ -8,6 +8,7 @@ from spellchecker import SpellChecker
 class AnalyzeRepo(Checker):
     def __init__(self, content, url=None, provider=None):
         self._content = str(content)
+        self._provider = provider
         super().__init__(str(content), url=url)
     
     def name(self):
@@ -28,3 +29,13 @@ class AnalyzeRepo(Checker):
     
     def _default_checkers(self):
         return []
+    
+    def _check_issues(self):
+        """ provides checking if open issues is exist
+        at the directory
+        """
+        msg = 'Checking of go.mod'
+        result = 0 if not self._check_modules() else 1
+        output(msg, result)
+        self.score.add_check(msg, result)
+        return result
