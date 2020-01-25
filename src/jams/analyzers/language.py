@@ -87,11 +87,21 @@ class PythonLang(Checker):
                 ]
     
     def _check_setup(self):
-        """ provides checking if setup.py if exist
+        """ provides checking if setup.py is exist
         at the directory
         """
         msg = 'Checking of setup.py'
         result = 0 if not self._get_file('setup.py', None) else 1
+        output(msg, result)
+        self.score.add_check(msg, result)
+        return result
+
+     def _check_toxini(self):
+        """ provides checking if tox.ini is exist
+        at the directory
+        """
+        msg = 'Checking of tox.ini'
+        result = 0 if not self._get_file('tox.ini', None) else 1
         output(msg, result)
         self.score.add_check(msg, result)
         return result

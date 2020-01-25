@@ -63,6 +63,8 @@ instance/
 # Scrapy stuff:
 .scrapy
 
+config.yml
+
 # Sphinx documentation
 docs/_build/
 
