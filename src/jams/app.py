@@ -13,7 +13,7 @@ class App(object):
         self._description = description
         self._providers_inn = dict(
             github=GithubProvider)
-    
+
     def add_checkers_from_config(self, checkers):
         '''
         adding checkers manually
@@ -28,7 +28,8 @@ class App(object):
             raise Exception('Hostname is not defined')
         if len(url.path) == 0:
             raise Exception('Url path is not defined')
-        provider = self._make_provider(url.hostname.split('.')[0], url.path[1:])
+        provider = self._make_provider(
+            url.hostname.split('.')[0], url.path[1:])
         path = url.path[1:]
         return Jams(path, provider, self._config)
 
@@ -53,6 +54,7 @@ class App(object):
             token = os.environ['GITLAB_TOKEN']
         return self._providers_inn[provider_name](token, url)
 
+
 def parse_yaml(path):
     import yaml
     try:
@@ -63,6 +65,7 @@ def parse_yaml(path):
             return
         e.strerror = "Unable to load configuration file {0}".Format(e.strerror)
     return data_loaded
+
 
 def parse_args():
     import argparse
@@ -83,6 +86,7 @@ def parse_args():
         url = config_parsed['url']
         a.add_checkers_from_config(config_parsed)
         a.build(url).report()
+
 
 if __name__ == '__main__':
     parse_args()

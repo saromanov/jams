@@ -19,13 +19,13 @@ class GithubProvider(Provider):
         '''
         repo = self.get_repo(name)
         return repo.get_issues(state='open')
-    
+
     def get_labels(self):
         ''' return list of labels for the repo
         '''
         repo = self.get_repo(name)
         return repo.get_labels()
-    
+
     def get_topics(self):
         '''
         return list of repository topics

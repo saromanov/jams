@@ -1,6 +1,7 @@
 from task import Task
 from score import Score
 
+
 class Checker:
     """
     This class defines base class for analyze content
@@ -29,34 +30,34 @@ class Checker:
         before start of checkers
         '''
         raise NotImplementedError
-    
+
     def get_checkers(self):
         '''
         return list of names of checkers
         '''
         raise NotImplementedError
-    
+
     def name(self):
         '''
         return name of the checker
         '''
         raise NotImplementedError
-    
+
     def get_score(self):
         '''
         return score after checks
         '''
         return self.score.result()
-    
+
     def _get_checkers(self):
         '''
         retrun only methods with starts with _check
         '''
         return list(filter(lambda x: x.startswith('_check'), dir(self)))
-    
+
     def _default_checkers(self):
         return []
-    
+
     def _make_checkers(self, **kwargs):
         '''
         creating list of checkers for session
@@ -66,7 +67,7 @@ class Checker:
             return self._default_checkers()
         checkers = list(filter(lambda x: x[7:] in names, self._get_checkers()))
         return list(map(lambda x: getattr(self, x)(), checkers))
-    
+
     def _get_checkers_names_from_cfg(self, config):
         name = self.name()
         if config is None:
@@ -76,4 +77,3 @@ class Checker:
         if name not in config['checkers']:
             return None
         return config['checkers'][name]
-

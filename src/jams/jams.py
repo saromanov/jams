@@ -6,6 +6,8 @@ from analyzers.repo import AnalyzeRepo
 
 GO_LANG = 'Go'
 PYTHON_LANG = 'Python'
+
+
 class Jams:
     ''' Jams class provides implementation of the user logic
         all handling insede the app. Getting files, analyzing, etc
@@ -15,16 +17,21 @@ class Jams:
         self._provider = provider
         self._url = url
         self._config = config
-        self._specified_checkers = self._select_language(self.detect_language())
+        self._specified_checkers = self._select_language(
+            self.detect_language())
         self._checkers = self._make_checkers()
-    
+
     def _make_checkers(self):
-        """ 
+        """
         returns registered checkers
         if config is not empty, then adding that to the checkers
         """
         if self._config is None or 'checkers' not in self._config:
-            return [self._specified_checkers, AnalyzeReadme, AnalyzeDockerfile, AnalyzeRoot]
+            return [
+                self._specified_checkers,
+                AnalyzeReadme,
+                AnalyzeDockerfile,
+                AnalyzeRoot]
         checkers = []
         checker = self._config['checkers']
         if 'readme' in checker:
@@ -80,7 +87,8 @@ class Jams:
             r.start_message()
             r.check(self._url, config=self._config)
             score += r.get_score()
-        print('Score: {0} of {1} {2:.2%}'.format(score, len(self._checkers), score/len(self._checkers)))
+        print('Score: {0} of {1} {2:.2%}'.format(
+            score, len(self._checkers), score / len(self._checkers)))
         return content_file
 
     def _get_readme(self):

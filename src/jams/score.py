@@ -5,6 +5,7 @@
     Implementing score method for calculation of score from checkers
 """
 
+
 class Score:
     def __init__(self):
         self._score = 0
