@@ -80,7 +80,7 @@ class Jams:
             r.start_message()
             r.check(self._url, config=self._config)
             score += r.get_score()
-        print('Score: {0} of {1}'.format(score, len(self._checkers)))
+        print('Score: {0} of {1} {2:.2%}'.format(score, len(self._checkers), score/len(self._checkers)))
         return content_file
 
     def _get_readme(self):
