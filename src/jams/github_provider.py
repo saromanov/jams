@@ -19,6 +19,12 @@ class GithubProvider(Provider):
         '''
         repo = self.get_repo(name)
         return repo.get_issues(state='open')
+    
+    def get_labels(self):
+        ''' return list of labels for the repo
+        '''
+        repo = self.get_repo(name)
+        return repo.get_labels()
 
     def get_content_file(self, repo, name):
         '''returns specific content file
