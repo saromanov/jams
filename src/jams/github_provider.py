@@ -25,6 +25,13 @@ class GithubProvider(Provider):
         '''
         repo = self.get_repo(name)
         return repo.get_labels()
+    
+    def get_topics(self):
+        '''
+        return list of repository topics
+        '''
+        repo = self.get_repo(name)
+        return repo.get_topics()
 
     def get_content_file(self, repo, name):
         '''returns specific content file
