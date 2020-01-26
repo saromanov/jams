@@ -1,5 +1,4 @@
 import os
-from gitlab_provider import GitlabProvider
 from github_provider import GithubProvider
 from jams import Jams
 import urllib.parse as urllib
@@ -13,7 +12,7 @@ class App(object):
         self._config = {}
         self._description = description
         self._providers_inn = dict(
-            github=GithubProvider, gitlab=GitlabProvider)
+            github=GithubProvider)
     
     def add_checkers_from_config(self, checkers):
         '''
