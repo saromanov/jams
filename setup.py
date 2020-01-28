@@ -41,5 +41,13 @@ if __name__ == "__main__":
         ],
         test_suite="jams.tests.AllTests",
         python_requires=">=3.0",
-        install_requires=get_requirements()
+        install_requires=get_requirements(),
+        extras_require={
+        "dotenv": ["python-dotenv"],
+        "dev": [
+            "pytest",
+            "coverage",
+            "tox",
+        ]
+    }
     )
