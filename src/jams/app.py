@@ -28,9 +28,9 @@ class App(object):
             raise InputError('Hostname is not defined')
         if len(url.path) == 0:
             raise InputError('Url path is not defined')
-        provider = self._make_provider(
-            url.hostname.split('.')[0], url.path[1:])
         path = url.path[1:]
+        provider = self._make_provider(
+            url.hostname.split('.')[0], path)
         return Jams(path, provider, self._config)
 
     def _parse_url(self, url):
@@ -49,10 +49,7 @@ class App(object):
         """
         if 'GITHUB_TOKEN' not in os.environ:
             raise InputError('GITHUB_TOKEN is not provided')
-        token = os.environ['GITHUB_TOKEN']
-        if not token:
-            token = os.environ['GITLAB_TOKEN']
-        return self._providers_inn[provider_name](token, url)
+        return self._providers_inn[provider_name](os.environ['GITHUB_TOKEN'], url)
 
 
 def parse_yaml(path):

@@ -18,7 +18,7 @@ class Jams:
         self._url = url
         self._config = config
         self._specified_checkers = self._select_language(
-            self.detect_language())
+            self.detect_language)
         self._checkers = self._make_checkers()
 
     def _make_checkers(self):
@@ -54,9 +54,10 @@ class Jams:
     def _select_language(self, lang):
         ''' getting specified checkers for the language
         '''
-        if lang == GO_LANG:
+        result = lang()
+        if result == GO_LANG:
             return GoLang
-        elif lang == PYTHON_LANG:
+        elif result == PYTHON_LANG:
             return PythonLang
         else:
             raise NotSupportedLanguageException('language is not supported')
