@@ -4,3 +4,6 @@ class DetectLanguageException(Exception):
 
 class NotSupportedLanguageException(Exception):
     pass
+
+class InputError(Exception):
+    pass

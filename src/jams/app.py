@@ -25,9 +25,9 @@ class App(object):
         '''
         url = self._parse_url(url)
         if not url.hostname:
-            raise Exception('Hostname is not defined')
+            raise InputError('Hostname is not defined')
         if len(url.path) == 0:
-            raise Exception('Url path is not defined')
+            raise InputError('Url path is not defined')
         provider = self._make_provider(
             url.hostname.split('.')[0], url.path[1:])
         path = url.path[1:]
@@ -39,7 +39,7 @@ class App(object):
         then raise exception thats provider is not defined
         '''
         if not url:
-            raise Exception("url is not defined")
+            raise InputError("url is not defined")
         return urllib.urlparse(url)
 
     def _make_provider(self, provider_name, url):
@@ -48,7 +48,7 @@ class App(object):
         reading of access Github token from environment variable
         """
         if 'GITHUB_TOKEN' not in os.environ:
-            raise Exception('GITHUB_TOKEN is not provided')
+            raise InputError('GITHUB_TOKEN is not provided')
         token = os.environ['GITHUB_TOKEN']
         if not token:
             token = os.environ['GITLAB_TOKEN']
@@ -77,7 +77,7 @@ def parse_args():
     repo = args.repo
     config = args.config
     if repo is None and config is None:
-        raise Exception('Repo or config is not provided')
+        raise InputError('Repo or config is not provided')
     a = App('check', '0.1')
     if repo:
         a.build(repo).report()
