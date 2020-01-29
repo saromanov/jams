@@ -3,7 +3,7 @@ from checker import Checker
 from output import output
 
 """
-    james.language
+    james.analyzers.language
     ~~~~~~~~~~~~~
     Implementing language classes which conteins specific
     checks for each language
