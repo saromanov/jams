@@ -73,8 +73,11 @@ class AnalyzeRoot(Checker):
     
     def _get_license(self):
         '''trying to get license from repo
+           at this moment quick and dirty check
+           of the license contains
         '''
-        return self._get_file('LICENSE', self._url)
+        license = self._get_file('LICENSE', self._url)
+        return True if b'License' in license and b'Copyright' in license else False
     
     def _get_file(self, name, url):
         """trying to get file
