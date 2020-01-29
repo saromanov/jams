@@ -116,6 +116,28 @@ class PythonLang(Checker):
         output(msg, result)
         self.score.add_check(msg, result)
         return result
+    
+    def _check_versions(self):
+        ''' provides checking of actual versions based on setup.py
+            Its not make sense to check versions on 2.x, since
+            support of this is depricated
+        '''
+        setup = self._get_file('setup.py', None)
+        if not setup:
+            return 0
+        supported = ['3.5','3.6','3.7', '3.8']
+        beginning = 'Programming Language :: Python :: '
+        for line in setup.split('\n'):
+            if not line.startswith(beginning):
+                continue
+            data = line.split(beginning)[1]
+            if data in supported:
+                supported.remove(data)
+        msg = 'checking of supported versions'
+        result = 0 if len(supported) > 0 else 1
+        output(msg, result)
+        self.score.add_check(msg, result)
+        return result
 
     def _check_toxini(self):
         """ provides checking if tox.ini is exist
