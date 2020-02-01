@@ -131,6 +131,9 @@ class PythonLang(Checker):
             if not line.startswith(beginning):
                 continue
             data = line.split(beginning)[1]
+            if len(data) < 2:
+                continue
+            data = data[0:len(data)-2]
             if data in supported:
                 supported.remove(data)
         msg = 'checking of supported versions'
