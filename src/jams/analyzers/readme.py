@@ -1,7 +1,8 @@
+from multiprocessing.pool import ThreadPool
+import requests
 from checker import Checker
 from output import output
 from task import Task
-import requests
 from urlextract import URLExtract
 from spellchecker import SpellChecker
 
@@ -74,10 +75,10 @@ class AnalyzeReadme(Checker):
         extractor = URLExtract()
         links = extractor.find_urls(self._content)
         links = list(filter(lambda x: x.startswith('http') and '(' not in x and '\\n' not in x, links))
-        broken_links = list(filter(lambda x: requests.get(x).status_code > 299, links))
-        output('Checking of brokens links', len(broken_links) == 0)
-        self.score.add_check('Repo contains broken links', broken_links)
-        return 0 if len(broken_links) > 0 else 1
+        broken_links = async_check_urls(links)
+        output('Checking of brokens links', broken_links == 0)
+        self.score.add_check('Repo contains broken links', broken_links > 0)
+        return 0 if broken_links > 0 else 1
     
     def _check_misspelling(self):
         '''
@@ -100,3 +101,21 @@ class AnalyzeReadme(Checker):
         self.score.add_check(
             'Not contains Getting Started or Overflow parts', result)
         return 0 if result else 1
+
+def async_check_urls(urls):
+    '''
+    checking of availability of urls
+    '''
+    pool = ThreadPool(10)
+    results = [pool.apply_async(check_url, args=(url,)) for url in urls]
+    pool.close()
+    pool.join()
+    return sum([r.get() for r in results]) > 0
+
+def check_url(url):
+    '''
+    check url returns fails if status code returns > 299
+    '''
+    return requests.get(url).status_code > 299
+
+

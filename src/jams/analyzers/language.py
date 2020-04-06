@@ -42,7 +42,8 @@ class GoLang(Checker):
                 ]
     
     def _check_gomod(self):
-        """ provides checking if go.mod is exist
+        """ 
+        provides checking if go.mod is exist
         at the directory
         """
         msg = 'Checking of go.mod'
@@ -52,7 +53,8 @@ class GoLang(Checker):
         return result
     
     def _check_godoc_link(self):
-        """ provides checking of link to gomod
+        """ 
+        provides checking of link to gomod
         on README.md
         """
         msg = 'Checking of godoc link'
@@ -70,7 +72,7 @@ class GoLang(Checker):
         provides checking of go.mod file is exist
         at teh root of the dir
         '''
-        return 0 if not self._get_file('go.mod', None) else 1
+        return self._get_file('go.mod', None)
     
     def _get_file(self, name, url):
         """trying to get file
