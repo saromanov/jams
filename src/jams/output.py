@@ -7,4 +7,7 @@ def output(message, passed, **kwargs):
     if not passed:
         line = '[x]'
         details = kwargs.get('details')
-    print('{0}: {1}\n{2}'.format(line, message, details))
+    result = '{0}: {1}\n{2}'.format(line, message, details)
+    if not message:
+        result = '{0}: \n{2}'.format(line, details)
+    print(result)

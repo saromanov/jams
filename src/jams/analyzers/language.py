@@ -66,7 +66,11 @@ class GoLang(Checker):
 
     
     def _check_modules(self):
-        return self._get_file('go.mod', None)
+        '''
+        provides checking of go.mod file is exist
+        at teh root of the dir
+        '''
+        return 0 if not self._get_file('go.mod', None) else 1
     
     def _get_file(self, name, url):
         """trying to get file
@@ -74,7 +78,7 @@ class GoLang(Checker):
         try:
             return self._provider.get_content_file(
                 url, name)
-        except Exception:
+        except IOError:
             return None
 
 
