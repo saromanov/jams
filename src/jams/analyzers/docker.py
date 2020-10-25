@@ -20,8 +20,7 @@ class AnalyzeDockerfile(Checker):
     def check(self, url, **kwargs):
         """ checks provides running of all sub-checks
         """
-        docker_file = self._get_file('Dockerfile', None)
-        if not docker_file:
+        if not self._get_file('Dockerfile', None):
             print('!Dockerfile is not exist!')
             return
         checks = [self._check_latest(), self._check_run_command()]
@@ -39,7 +38,7 @@ class AnalyzeDockerfile(Checker):
         output('Checking of the :latest tag', result)
     
     def _check_run_command(self):
-        if self._content.find('RUN wget'):
+        if self._content.find('RUN wget') or self._content.find('RUN curl'):
             return 0
         return 1
     
