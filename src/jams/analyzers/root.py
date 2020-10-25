@@ -57,7 +57,7 @@ class AnalyzeRoot(Checker):
         '''
         msg = 'Checking of the .gitignore at the root'
         result = 0 if not self._get_gitignore() else 1
-        output(msg, result, '.gitignore file is not found')
+        output(msg, result)
         self.score.add_check(msg, result)
         return result
 

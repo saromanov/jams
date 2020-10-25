@@ -1,5 +1,5 @@
 from analyzers.readme import AnalyzeReadme
-from analyzers.dockerfile import AnalyzeDockerfile
+from analyzers.docker import AnalyzeDockerfile
 from analyzers.root import AnalyzeRoot
 from analyzers.language import GoLang, PythonLang
 from analyzers.repo import AnalyzeRepo

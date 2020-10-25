@@ -15,7 +15,7 @@ class AnalyzeDockerfile(Checker):
     def start_message(self):
         """return message before start of docker checks
         """
-        print('>Checking of the Dockerfile file\n')
+        print('>Checking of the Dockerfile\n')
     
     def check(self, url, **kwargs):
         """ checks provides running of all sub-checks
